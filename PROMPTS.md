@@ -55,14 +55,8 @@ I checked: Verified in the browser that clicking different character cards dynam
 > 
 > Keep plain CSS, no third-party libraries.
 
-**23:26 · claude**
-
-> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
-> Please update the following two documentation files:
-> 
-> 1. In `PROMPTS.md`:
-> Under the Task 2 entry, ensure the "I checked:" line is added at the end:
-> "I checked: Verified in the browser that clicking different character cards dynamically updates the details panel with the selected character's species, status, and origin, and confirmed the two-column master-detail layout renders properly."
+## Task 2 — click an item to show its details
+I checked: Clicked on character cards and confirmed that the details view updates dynamically with the selected character's status, species, and origin.
 > 
 > 2. In `README.md`:
 > Append the following explanation section at the end of the file in Hebrew:
@@ -73,3 +67,36 @@ I checked: Verified in the browser that clicking different character cards dynam
 > כאשר המשתמש לוחץ על כרטיס של דמות ב-`CharacterCard`, מופעלת פונקציית callback שמועברת כלפי מעלה ומעדכנת את ה-state ב-`App`. 
 > ברגע שה-state משתנה, React מפעיל רינדור מחדש ומעביר את אובייקט הדמות שנבחרה למטה כ-prop בשם `character` ישירות לרכיב `CharacterDetail`. 
 > רכיב הפרטים מקבל את ה-prop לקריאה בלבד ומציג את הנתונים המלאים של הדמות שנבחרה (שם, תמונה, סטטוס, גזע ועולם מוצא).
+
+**23:35 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Please implement Task 3 ONLY:
+> 1. In `src/App.jsx`, replace the imported mock data with a real `fetch()` call inside a `useEffect` hook to:
+>    `https://rickandmortyapi.com/api/character`
+> 2. Add state management for:
+>    - `characters`: array of characters initialized as empty `[]`.
+>    - `loading`: boolean initialized as `true`.
+>    - `error`: string/null initialized as `null`.
+> 3. Handle the 3 UI states cleanly:
+>    - When loading: display a user-friendly loading indicator (e.g. "טוען דמויות...").
+>    - When error: display an error message (e.g. "שגיאה בטעינת הנתונים, אנא נסה שוב").
+>    - When success: render the character list and details panel as before.
+> 4. Keep the selection logic intact (`onSelectCharacter` and `selectedCharacter`).
+> 
+> Do NOT implement search yet.
+> Explain what you changed in 3 plain sentences.
+
+**23:38 · claude**
+
+> Fix the React crash error: "Objects are not valid as a React child (found: object with keys {name, url})".
+> 
+> In `src/components/CharacterDetail.jsx`:
+> 1. Find where `character.origin` or `character.location` are rendered.
+> 2. The Rick and Morty API returns `origin` and `location` as objects: `{ name: string, url: string }`.
+> 3. Update the JSX to render their `.name` property safely instead of the whole object:
+>    - For Origin: `{character.origin?.name || (typeof character.origin === 'string' ? character.origin : 'Unknown')}`
+>    - For Location: `{character.location?.name || 'Unknown'}`
+> 4. Ensure no raw object is directly embedded as a React child anywhere in this component.
+
+I checked: Replaced mock data with live Rick and Morty API. Fixed a React child object crash on `character.origin.name`. Verified in DevTools console that characters load dynamically and selection works cleanly with no runtime errors.

@@ -14,7 +14,7 @@ export default function CharacterDetail({ character }) {
       <p><strong>Status:</strong> {character.status}</p>
       <p><strong>Species:</strong> {character.species}</p>
       <p><strong>Gender:</strong> {character.gender}</p>
-      <p><strong>Origin:</strong> {character.origin}</p>
+      <p><strong>Origin:</strong> {character.origin?.name || (typeof character.origin === 'string' ? character.origin : 'Unknown')}</p>
     </div>
   )
 }
