@@ -2,7 +2,7 @@ export default function CharacterDetail({ character }) {
   if (!character) {
     return (
       <div className="character-detail">
-        <p>Select a character to view details</p>
+        <p className="detail-placeholder">Select a character to view details</p>
       </div>
     )
   }

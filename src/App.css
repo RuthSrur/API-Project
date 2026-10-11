@@ -1,138 +1,141 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f3f4f6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1f2937;
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: 20px;
-  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
 }
 
 .app h1 {
-  margin: 0;
-  font-size: 28px;
-  color: #333;
   text-align: center;
+  margin-bottom: 16px;
+  color: #111827;
 }
 
-.app > h1 {
-  grid-column: 1 / -1;
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
 }
 
-.app > div:last-child {
+.search-input {
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+}
+
+.main-content {
   display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 20px;
-  flex: 1;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: start;
 }
 
 .character-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 16px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
 .character-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  background: #ffffff;
+  border-radius: 12px;
   padding: 12px;
-  background-color: #fafafa;
-  border: 2px solid transparent;
-  border-radius: 8px;
+  text-align: center;
   cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   transition: all 0.2s ease;
-  max-width: 160px;
 }
 
 .character-card:hover {
-  background-color: #f0f0f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-.character-card.active {
-  border-color: #2196f3;
-  background-color: #e3f2fd;
+.character-card.active,
+.character-card.selected {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
 }
 
 .character-card img {
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 140px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
+.character-card h3,
 .character-card h2 {
-  margin: 0;
-  font-size: 14px;
-  text-align: center;
-  color: #333;
-  word-break: break-word;
+  font-size: 15px;
+  margin: 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .character-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 24px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
-  top: 20px;
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
-}
-
-.character-detail p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
-  line-height: 1.6;
-}
-
-.character-detail p:first-of-type {
+  top: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   text-align: center;
-  color: #999;
-  font-size: 16px;
-  padding: 40px 0;
 }
 
 .character-detail img {
   width: 100%;
-  max-width: 200px;
-  height: 200px;
+  max-height: 260px;
   object-fit: cover;
-  border-radius: 6px;
-  margin: 0 auto;
-  display: block;
+  border-radius: 12px;
+  margin-bottom: 16px;
 }
 
 .character-detail h2 {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-  text-align: center;
+  margin: 0 0 12px 0;
+  font-size: 22px;
 }
 
-.character-detail strong {
-  color: #333;
-  font-weight: 600;
+.character-detail p {
+  margin: 8px 0;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 6px;
+}
+
+.detail-placeholder {
+  color: #6b7280;
+  padding: 60px 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.no-results {
+  text-align: center;
+  color: #6b7280;
+  padding: 40px 20px;
+  font-size: 16px;
 }
