@@ -66,6 +66,7 @@ export default function App() {
                 error={error}
                 favorites={favorites}
                 onAddFavorite={addFavorite}
+                onRemoveFavorite={removeFavorite}
               />
             }
           />

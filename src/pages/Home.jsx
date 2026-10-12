@@ -3,7 +3,7 @@ import CharacterList from '../components/CharacterList'
 import CharacterDetail from '../components/CharacterDetail'
 import SearchBar from '../components/SearchBar'
 
-export default function Home({ characters, loading, error, favorites, onAddFavorite }) {
+export default function Home({ characters, loading, error, favorites, onAddFavorite, onRemoveFavorite }) {
   const [selectedCharacter, setSelectedCharacter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -30,6 +30,7 @@ export default function Home({ characters, loading, error, favorites, onAddFavor
                 selectedId={selectedCharacter?.id}
                 favorites={favorites}
                 onAddFavorite={onAddFavorite}
+                onRemoveFavorite={onRemoveFavorite}
               />
               <CharacterDetail character={selectedCharacter} />
             </div>
