@@ -133,146 +133,21 @@ I checked: Replaced mock data with live Rick and Morty API. Fixed a React child 
 > 
 > Ensure everything fits neatly on the screen without massive overflowing white areas.
 
-**23:48 · claude**
+I checked: Tested the live search bar to verify real-time filtering, confirmed the two-column grid layout displays properly without layout shifts, and verified smooth card selection and responsive sticky details view.
 
-> Please completely replace the contents of `src/App.css` and ensure clean component layout:
+## 2026-10-12
+
+**18:06 · claude**
+
+> 1. Review `src/App.jsx`, `src/components/`, and `src/App.css`:
+>    - Clean up any unused imports or console.log statements.
+>    - Verify all list items have unique `key` props (`character.id`).
+>    - Ensure clean error handling if the API fetch fails.
+> 2. Update `tasks.md` to mark all completed tasks (Tasks 1 through 6) as [x] done.
+> 3. Update `README.md` to make sure it includes:
+>    - App title and description (Rick and Morty Master-Detail app).
+>    - How to run the app (`npm install`, `npm run dev`).
+>    - The live API endpoint used.
+>    - The 5 Hebrew sentences explaining state and data flow.
 > 
-> 1. Reset & Global:
-> body {
->   margin: 0;
->   background-color: #f3f4f6;
->   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
->   color: #1f2937;
-> }
-> 
-> .app {
->   max-width: 1200px;
->   margin: 0 auto;
->   padding: 24px 20px;
-> }
-> 
-> .app h1 {
->   text-align: center;
->   margin-bottom: 16px;
->   color: #111827;
-> }
-> 
-> 2. Search Bar styling:
-> .search-container {
->   display: flex;
->   justify-content: center;
->   margin-bottom: 28px;
-> }
-> 
-> .search-input {
->   width: 100%;
->   max-width: 480px;
->   padding: 12px 18px;
->   border-radius: 9999px;
->   border: 1px solid #d1d5db;
->   font-size: 15px;
->   outline: none;
->   background: #ffffff;
->   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-> }
-> 
-> .search-input:focus {
->   border-color: #3b82f6;
->   box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
-> }
-> 
-> 3. Two-Column Master-Detail Layout:
-> .main-content {
->   display: grid;
->   grid-template-columns: 1fr 380px;
->   gap: 28px;
->   align-items: start;
-> }
-> 
-> 4. Character List & Cards (Left Column):
-> .character-list {
->   display: grid;
->   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
->   gap: 16px;
->   max-height: 80vh;
->   overflow-y: auto;
->   padding-right: 8px;
-> }
-> 
-> .character-card {
->   background: #ffffff;
->   border-radius: 12px;
->   padding: 12px;
->   text-align: center;
->   cursor: pointer;
->   border: 2px solid transparent;
->   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
->   transition: all 0.2s ease;
-> }
-> 
-> .character-card:hover {
->   transform: translateY(-3px);
->   box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-> }
-> 
-> .character-card.active, .character-card.selected {
->   border-color: #3b82f6;
->   background-color: #eff6ff;
-> }
-> 
-> .character-card img {
->   width: 100%;
->   height: 140px;
->   object-fit: cover;
->   border-radius: 8px;
->   margin-bottom: 8px;
-> }
-> 
-> .character-card h3, .character-card h2 {
->   font-size: 15px;
->   margin: 4px 0;
->   white-space: nowrap;
->   overflow: hidden;
->   text-overflow: ellipsis;
-> }
-> 
-> 5. Details Panel (Right Column):
-> .character-detail {
->   position: sticky;
->   top: 24px;
->   background: #ffffff;
->   border-radius: 16px;
->   padding: 24px;
->   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
->   text-align: center;
-> }
-> 
-> .character-detail img {
->   width: 100%;
->   max-height: 260px;
->   object-fit: cover;
->   border-radius: 12px;
->   margin-bottom: 16px;
-> }
-> 
-> .character-detail h2 {
->   margin: 0 0 12px 0;
->   font-size: 22px;
-> }
-> 
-> .character-detail p {
->   margin: 8px 0;
->   font-size: 14px;
->   text-align: left;
->   border-bottom: 1px solid #f3f4f6;
->   padding-bottom: 6px;
-> }
-> 
-> .detail-placeholder {
->   color: #6b7280;
->   padding: 60px 20px;
->   text-align: center;
->   font-size: 16px;
-> }
-> 
-> Ensure `App.jsx` wraps `<SearchBar />` in
+> Explain your final polish changes in 3 plain sentences.
