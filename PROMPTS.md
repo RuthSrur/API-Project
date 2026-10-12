@@ -151,3 +151,44 @@ I checked: Tested the live search bar to verify real-time filtering, confirmed t
 >    - The 5 Hebrew sentences explaining state and data flow.
 > 
 > Explain your final polish changes in 3 plain sentences.
+
+
+
+**18:26 · claude**
+
+> ## Bonus: React Router + Favorites Feature
+> 
+> ### מה לעשות:
+> 1. **התקנת React Router**
+>    - `npm install react-router-dom`
+> 
+> 2. **ניתוב (Routing)**
+>    - Create two pages:
+>      - **Home** (`/`): הרשימה + הפרטים (המצב הנוכחי)
+>      - **Favorites** (`/favorites`): רשימת המועדפים בלבד
+>    - Add navigation: 2 links בעמוד (Home, Favorites)
+> 
+> 3. **Favorites Functionality**
+>    - Add a "♥️ Add to Favorites" button in CharacterCard
+>    - Store favorites in App state (or localStorage for persistence)
+>    - On Favorites page: show only favorites, allow remove from favorites
+>    - If no favorites: show a friendly message "No favorites yet"
+> 
+> 4. **State Management**
+>    - Keep favorites array in App.jsx (or localStorage)
+>    - Pass favorites + addFavorite/removeFavorite callbacks down
+> 
+> ### Acceptance Criteria:
+> - When I click "Home" link, I see the character list and search
+> - When I click a heart icon on a card, the character is added to favorites
+> - When I click "Favorites" link, I see only characters I favorited
+> - When I remove a character from favorites, it disappears from the Favorites page
+> - Navigation between Home and Favorites works without errors
+> - Favorites persist if using localStorage
+> 
+> ### Do NOT:
+> - Add Redux or state management library
+> - Over-engineer the favorites feature
+> - Delete the existing list/detail functionality
+> 
+> ### Explain your changes in 3 plain sentences.

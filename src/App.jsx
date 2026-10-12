@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
-import CharacterList from './components/CharacterList'
-import CharacterDetail from './components/CharacterDetail'
-import SearchBar from './components/SearchBar'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Home from './pages/Home'
+import Favorites from './pages/Favorites'
 import './App.css'
 
 export default function App() {
   const [characters, setCharacters] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [selectedCharacter, setSelectedCharacter] = useState(null)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character')
@@ -27,30 +26,62 @@ export default function App() {
       })
   }, [])
 
-  const filteredCharacters = characters.filter(char =>
-    char.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  useEffect(() => {
+    const saved = localStorage.getItem('favorites')
+    if (saved) setFavorites(JSON.parse(saved))
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites))
+  }, [favorites])
+
+  const addFavorite = (character) => {
+    if (!favorites.find(fav => fav.id === character.id)) {
+      setFavorites([...favorites, character])
+    }
+  }
+
+  const removeFavorite = (characterId) => {
+    setFavorites(favorites.filter(fav => fav.id !== characterId))
+  }
 
   return (
-    <main className="app">
-      <h1>Rick and Morty Characters</h1>
-      {loading && <p>טוען דמויות...</p>}
-      {error && <p>שגיאה בטעינת הנתונים, אנא נסה שוב</p>}
-      {!loading && !error && (
-        <>
-          <div className="search-container">
-            <SearchBar value={searchTerm} onChange={setSearchTerm} />
+    <BrowserRouter>
+      <div className="app-wrapper">
+        <nav className="navbar">
+          <h1>Rick and Morty Explorer 🛸</h1>
+          <div className="nav-links">
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/favorites" className="nav-link">
+              Favorites ♥️ ({favorites.length})
+            </Link>
           </div>
-          {filteredCharacters.length === 0 ? (
-            <p className="no-results">לא נמצאו דמויות תואמות</p>
-          ) : (
-            <div className="main-content">
-              <CharacterList characters={filteredCharacters} onSelectCharacter={setSelectedCharacter} selectedId={selectedCharacter?.id} />
-              <CharacterDetail character={selectedCharacter} />
-            </div>
-          )}
-        </>
-      )}
-    </main>
+        </nav>
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                characters={characters}
+                loading={loading}
+                error={error}
+                favorites={favorites}
+                onAddFavorite={addFavorite}
+              />
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                favorites={favorites}
+                onRemoveFavorite={removeFavorite}
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
