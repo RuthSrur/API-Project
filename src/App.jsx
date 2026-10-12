@@ -8,7 +8,10 @@ export default function App() {
   const [characters, setCharacters] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [favorites, setFavorites] = useState([])
+  const [favorites, setFavorites] = useState(() => {
+    const saved = localStorage.getItem('favorites')
+    return saved ? JSON.parse(saved) : []
+  })
 
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character')
@@ -24,11 +27,6 @@ export default function App() {
         setError(err.message)
         setLoading(false)
       })
-  }, [])
-
-  useEffect(() => {
-    const saved = localStorage.getItem('favorites')
-    if (saved) setFavorites(JSON.parse(saved))
   }, [])
 
   useEffect(() => {
