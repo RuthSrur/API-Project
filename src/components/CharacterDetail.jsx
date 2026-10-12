@@ -12,8 +12,6 @@ export default function CharacterDetail({ character }) {
     ? new Date(character.created).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
     : 'N/A'
   const locationName = character.location?.name || 'Unknown'
-  const locationUrl = character.location?.url
-  const isValidUrl = locationUrl && (locationUrl.startsWith('http://') || locationUrl.startsWith('https://'))
 
   return (
     <div className="character-detail">
@@ -25,16 +23,7 @@ export default function CharacterDetail({ character }) {
       <p><strong>Origin:</strong> {character.origin?.name || (typeof character.origin === 'string' ? character.origin : 'Unknown')}</p>
       <p><strong>📺 Episodes:</strong> {episodeCount} {episodeCount === 1 ? 'appearance' : 'appearances'}</p>
       <p><strong>📅 Created:</strong> {createdDate}</p>
-      <p>
-        <strong>🌍 Location:</strong>{' '}
-        {isValidUrl ? (
-          <a href={locationUrl} target="_blank" rel="noreferrer" className="location-link">
-            {locationName}
-          </a>
-        ) : (
-          locationName
-        )}
-      </p>
+      <p><strong>🌍 Location:</strong> {locationName}</p>
     </div>
   )
 }
