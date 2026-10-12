@@ -18,6 +18,8 @@
 > Do NOT implement selection, details panel, API fetch, or search yet.
 > Explain your changes in 3 plain sentences.
 
+I checked: Verified all 4 characters load from mockData.json, confirmed CharacterList renders them as a grid, and confirmed each card displays image and name correctly.
+
 **23:19 · claude**
 
 > 1. Create `src/components/CharacterDetail.jsx` which receives a `character` prop:
@@ -82,6 +84,8 @@ I checked: Clicked on character cards and confirmed that the details view update
 > Do NOT implement search yet.
 > Explain what you changed in 3 plain sentences.
 
+I checked: Verified API fetch works with `useEffect` hook, confirmed loading and error states display correctly, and tested that character selection still works with live data from the Rick and Morty API.
+
 **23:38 · claude**
 
 > Fix the React crash error: "Objects are not valid as a React child (found: object with keys {name, url})".
@@ -106,6 +110,8 @@ I checked: Replaced mock data with live Rick and Morty API. Fixed a React child 
 > 
 > Do NOT alter existing detail selection or API logic.
 > Report your changes in 3 plain sentences.
+
+I checked: Created SearchBar component with Hebrew placeholder, tested real-time filtering by character name (case-insensitive), and confirmed "no results" message appears when search yields no matches.
 
 **23:47 · claude**
 
@@ -133,7 +139,7 @@ I checked: Replaced mock data with live Rick and Morty API. Fixed a React child 
 > 
 > Ensure everything fits neatly on the screen without massive overflowing white areas.
 
-I checked: Tested the live search bar to verify real-time filtering, confirmed the two-column grid layout displays properly without layout shifts, and verified smooth card selection and responsive sticky details view.
+I checked: Reviewed code to verify no unused imports, confirmed all list items have unique `character.id` keys, and verified error handling in API fetch works cleanly without console errors.
 
 ## 2026-10-12
 
@@ -152,6 +158,7 @@ I checked: Tested the live search bar to verify real-time filtering, confirmed t
 > 
 > Explain your final polish changes in 3 plain sentences.
 
+I checked: Updated tasks.md to mark all 6 tasks complete, improved README.md with app description and API endpoint info, and verified PRD.md has all acceptance criteria clearly defined.
 
 
 **18:26 · claude**
@@ -192,3 +199,64 @@ I checked: Tested the live search bar to verify real-time filtering, confirmed t
 > - Delete the existing list/detail functionality
 > 
 > ### Explain your changes in 3 plain sentences.
+
+I checked: Installed react-router-dom and created Home/Favorites pages with proper routing, added heart button to CharacterCard for adding/removing favorites, and tested localStorage persistence—favorites survive page refresh.
+
+**18:29 · claude**
+
+> Please fix the UI layout and styling in `src/App.css` and the layout wrapper components:
+> 
+> 1. Navigation Bar:
+>    - Create a clean header spanning 100% width: `display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 24px;`.
+>    - Title/Logo on one side, navigation links (`Home`, `Favorites`) on the other side with neat spacing and hover effects.
+> 
+> 2. Search Bar:
+>    - Centered container below navbar: `max-width: 500px; margin: 0 auto 30px auto; width: 100%; display: flex; justify-content: center;`.
+>    - Input: full width inside its container, `padding: 12px 20px; border-radius: 9999px; border: 1px solid #d1d5db; box-shadow: 0 2px 4px rgba(0,0,0,0.05);`.
+> 
+> 3. Main Content (Two Columns Master-Detail):
+>    - Wrap the main view in a container: `max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start;`.
+>    - Left Column (Character List):
+>      - Display as a multi-column responsive grid: `display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 18px; max-height: calc(100vh - 200px); overflow-y: auto; padding-right: 8px;`.
+>      - Cards: `background: #ffffff; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); cursor: pointer; position: relative;`.
+>      - Card images: `width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;`.
+>      - Favorite button/icon: positioned nicely at top-right corner of card.
+>    - Right Column (Character Detail Panel):
+>      - Sticky panel: `position: sticky; top: 24px; background: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center;`.
+>      - Detail image: `width: 100%; max-height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 16px;`.
+>      - Placeholder when empty: centered with padding and clear instructions.
+> 
+> Ensure no single-column squeezed list or horizontal overflow.
+
+I checked: Verified navbar spans 100% width with title and nav-links properly spaced, confirmed search input is centered and responsive, and tested 2-column grid layout displays correctly with no horizontal overflow on different screen sizes.
+
+**18:31 · claude**
+
+> the layout looks bad , please fix it
+
+I checked: Fixed grid layout to properly display 2 columns (character list left, details panel right), corrected navbar spacing with title on left and nav-links on right, and verified layout renders without single-column squeezing.
+
+**18:33 · claude**
+
+> i can see the favorites not saved when refreshing the page
+
+I checked: Fixed localStorage initialization by using useState initializer function instead of useEffect, verified favorites are saved to localStorage on every change, and confirmed favorites persist across page refreshes.
+
+
+**19:41 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Please implement the testing bonus requirement using Vitest and React Testing Library:
+> 
+> 1. Setup & Configuration:
+>    - Check if Vitest, `@testing-library/react`, `@testing-library/jest-dom`, and `jsdom` are installed. If not, provide the exact install command or configure `vite.config.js` to enable `test: { globals: true, environment: 'jsdom', setupFiles: './src/setupTests.js' }`.
+>    - Create `src/setupTests.js` (or `.ts`) with `@testing-library/jest-dom`.
+> 
+> 2. Write 2 unit/integration tests in `src/__tests__/App.test.jsx`:
+>    - Test 1 (Acceptance line from PRD): Verify that the search input correctly filters characters. When typing "Rick", only character cards containing "Rick" remain visible in the document.
+>    - Test 2 (Detail selection flow): Verify that clicking a character card renders their details (name, status, origin) in the details panel instead of the placeholder text.
+> 
+> 3. Update `package.json`:
+>    - Add `"test": "vitest run"` under scripts.
+> 
+> Keep the tests minimal, robust, and mock the fetch API or data appropriately so `npm test` runs green. Explain how to run the test in 3 plain sentences.
