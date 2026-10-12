@@ -260,3 +260,5 @@ I checked: Fixed localStorage initialization by using useState initializer funct
 >    - Add `"test": "vitest run"` under scripts.
 > 
 > Keep the tests minimal, robust, and mock the fetch API or data appropriately so `npm test` runs green. Explain how to run the test in 3 plain sentences.
+
+I checked: Ran `npm test` in the terminal and verified that both test suites passed green.
