@@ -5,6 +5,34 @@ body {
   color: #1f2937;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 .app-wrapper {
   min-height: 100vh;
   display: flex;
@@ -118,13 +146,18 @@ body {
   cursor: pointer;
   position: relative;
   border: 2px solid transparent;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  animation: fadeInUp 0.28s ease-out forwards;
 }
 
 .character-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
   border-color: #e5e7eb;
+}
+
+.character-card:active {
+  transform: scale(0.98);
 }
 
 .character-card.active,
@@ -196,6 +229,7 @@ body {
   text-align: center;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .character-detail img {
