@@ -17,11 +17,15 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+# Local Claude plugin cache
+.a5c/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
 
 # Prompt-log bookkeeping (Antigravity)
 scripts/.logged-prompts
