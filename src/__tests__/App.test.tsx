@@ -2,8 +2,9 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
+import { Character } from '../types'
 
-const mockCharacters = [
+const mockCharacters: Character[] = [
   {
     id: 1,
     name: 'Rick Sanchez',
@@ -13,6 +14,10 @@ const mockCharacters = [
     gender: 'Male',
     origin: { name: 'Earth (C-137)', url: '' },
     location: { name: 'Citadel of Ricks', url: '' },
+    type: '',
+    episode: [],
+    url: '',
+    created: '2017-11-04T19:22:43.665Z',
   },
   {
     id: 2,
@@ -23,6 +28,10 @@ const mockCharacters = [
     gender: 'Male',
     origin: { name: 'Earth (C-137)', url: '' },
     location: { name: 'Smith Residence', url: '' },
+    type: '',
+    episode: [],
+    url: '',
+    created: '2017-11-04T19:22:43.665Z',
   },
   {
     id: 3,
@@ -33,16 +42,23 @@ const mockCharacters = [
     gender: 'Female',
     origin: { name: 'Earth (C-137)', url: '' },
     location: { name: 'Smith Residence', url: '' },
+    type: '',
+    episode: [],
+    url: '',
+    created: '2017-11-04T19:22:43.665Z',
   },
 ]
 
 describe('App Component', () => {
   beforeEach(() => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ results: mockCharacters }),
-      })
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ results: mockCharacters }),
+        })
+      )
     )
   })
 
@@ -51,7 +67,7 @@ describe('App Component', () => {
     render(<App />)
 
     await waitFor(() => {
-      expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
+        expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
     })
 
     const searchInput = screen.getByPlaceholderText('חפש דמות...')
@@ -67,7 +83,7 @@ describe('App Component', () => {
     render(<App />)
 
     await waitFor(() => {
-      expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
+        expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
     })
 
     const rickCard = screen.getAllByText('Rick Sanchez')[0]

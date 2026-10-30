@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
+import { Character } from './types'
 import './App.css'
 
 export default function App() {
-  const [characters, setCharacters] = useState([])
+  const [characters, setCharacters] = useState<Character[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [favorites, setFavorites] = useState(() => {
+  const [error, setError] = useState<string | null>(null)
+  const [favorites, setFavorites] = useState<Character[]>(() => {
     const saved = localStorage.getItem('favorites')
     return saved ? JSON.parse(saved) : []
   })
@@ -19,11 +20,11 @@ export default function App() {
         if (!res.ok) throw new Error('Failed to fetch characters')
         return res.json()
       })
-      .then(data => {
+      .then((data: { results: Character[] }) => {
         setCharacters(data.results)
         setLoading(false)
       })
-      .catch(err => {
+      .catch((err: Error) => {
         setError(err.message)
         setLoading(false)
       })
@@ -33,13 +34,13 @@ export default function App() {
     localStorage.setItem('favorites', JSON.stringify(favorites))
   }, [favorites])
 
-  const addFavorite = (character) => {
+  const addFavorite = (character: Character) => {
     if (!favorites.find(fav => fav.id === character.id)) {
       setFavorites([...favorites, character])
     }
   }
 
-  const removeFavorite = (characterId) => {
+  const removeFavorite = (characterId: number) => {
     setFavorites(favorites.filter(fav => fav.id !== characterId))
   }
 

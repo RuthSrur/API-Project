@@ -2,9 +2,26 @@ import { useState } from 'react'
 import CharacterList from '../components/CharacterList'
 import CharacterDetail from '../components/CharacterDetail'
 import SearchBar from '../components/SearchBar'
+import { Character } from '../types'
 
-export default function Home({ characters, loading, error, favorites, onAddFavorite, onRemoveFavorite }) {
-  const [selectedCharacter, setSelectedCharacter] = useState(null)
+interface HomeProps {
+  characters: Character[]
+  loading: boolean
+  error: string | null
+  favorites: Character[]
+  onAddFavorite: (character: Character) => void
+  onRemoveFavorite: (characterId: number) => void
+}
+
+export default function Home({
+  characters,
+  loading,
+  error,
+  favorites,
+  onAddFavorite,
+  onRemoveFavorite,
+}: HomeProps) {
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredCharacters = characters.filter(char =>

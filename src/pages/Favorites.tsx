@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import CharacterList from '../components/CharacterList'
 import CharacterDetail from '../components/CharacterDetail'
+import { Character } from '../types'
 
-export default function Favorites({ favorites, onRemoveFavorite }) {
-  const [selectedCharacter, setSelectedCharacter] = useState(null)
+interface FavoritesProps {
+  favorites: Character[]
+  onRemoveFavorite: (characterId: number) => void
+}
+
+export default function Favorites({ favorites, onRemoveFavorite }: FavoritesProps) {
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
 
   if (favorites.length === 0) {
     return (

@@ -329,3 +329,69 @@ I checked: clicking the heart on a character in Favorites deselects it.
 >    - Include a `@media (prefers-reduced-motion: reduce)` block that disables or simplifies animations for users sensitive to motion.
 > 
 > Do NOT install any external libraries. Explain what you added in 3 plain sentences.
+
+## 2026-10-30
+
+**11:25 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Remove the `.a5c/` folder from the Git repository and prevent it from being committed again.
+> 
+> 1. Add `.a5c/` to `.gitignore`, under a short comment explaining it is a local Claude plugin cache.
+> 2. Untrack it with `git rm -r --cached .a5c`. Do not delete the folder from my disk.
+> 3. Do NOT touch `PROMPTS.md`, `scripts/`, `.claude/`, `.codex/`, `.gemini/`, or `.agents/`. They are required for prompt logging.
+> 4. Run `git status` and show me what will be committed before committing.
+> 5. Commit with the message: "chore: stop tracking .a5c plugin cache".
+> 6. Push to origin main.
+> 
+> Explain what you changed in 2 plain sentences.
+
+**11:33 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> The fadeIn animation on `.character-detail` only plays on first load, not when switching between characters, because React reuses the same DOM element.
+> 
+> Fix it by adding `key={selectedCharacter?.id ?? 'empty'}` to `<CharacterDetail />` in both `src/pages/Home.jsx` and `src/pages/Favorites.jsx`, so the panel remounts and the animation replays on every selection.
+> 
+> Do not change App.css. Commit with the message "fix: replay detail fade-in when switching characters". Explain the fix in 2 plain sentences.
+
+**11:42 · claude**
+
+> I want to migrate this project from JavaScript to TypeScript. This is an explicit request, and it overrides the "no TypeScript" rule in AGENTS.md.
+> 
+> First, show me a short plan and wait for my approval before changing anything.
+> 
+> After I approve:
+> 
+> 1. Update AGENTS.md: change the scope line so it allows TypeScript instead of forbidding it. Do not change any other rule.
+> 2. Install `typescript` as a dev dependency. This is the only new package. `@types/react` and `@types/react-dom` are already installed.
+> 3. Add a `tsconfig.json` suited to Vite + React with `strict: true`, and add `"typecheck": "tsc --noEmit"` to the scripts in package.json.
+> 4. Rename the files:
+>    - `src/main.jsx`, `src/App.jsx`, and everything in `src/components/` and `src/pages/` → `.tsx`
+>    - `src/__tests__/App.test.jsx` → `.tsx`
+>    - `src/setupTests.js` → `.ts`
+>    - `vite.config.js` → `vite.config.ts`
+>    Update `index.html` to point to `/src/main.tsx`, and update `setupFiles` in the Vite config.
+> 5. Create `src/types.ts` with a `Character` interface that matches the fields we use from the Rick and Morty API (id, name, status, species, image, episode, created, location, etc.).
+> 6. Add proper types to every component's props, to useState, and to the event handlers. Do not use `any`.
+> 7. Do NOT change any behavior, styling, or CSS. Do NOT touch PROMPTS.md, scripts/, .claude/, .codex/, .gemini/, or .agents/.
+> 8. Run `npm run typecheck`, `npm test`, and `npm run build`, and fix any errors until all three pass.
+> 
+> At the end, list the files that changed and explain the migration in 3 plain sentences. Do not commit; I will commit after I check.
+
+**11:45 · claude**
+
+> yes
+
+**11:54 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> The migration left duplicate files. Please clean up:
+> 
+> 1. Delete the old JavaScript files that now have TypeScript versions: `vite.config.js`, `src/main.jsx`, `src/App.jsx`, `src/setupTests.js`, `src/__tests__/App.test.jsx`, all `.jsx` files in `src/components/` and `src/pages/`.
+> 2. Delete `vitest.config.ts`. Keep the test settings only in `vite.config.ts`. Add `/// <reference types="vitest/config" />` at the top of `vite.config.ts` if it is needed for types.
+> 3. Delete `src/test.d.ts`. In `src/setupTests.ts`, change the import to `import '@testing-library/jest-dom/vitest'` and remove unused imports.
+> 4. Do not touch PROMPTS.md or any other file.
+> 5. Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
+> 
+> Show me the final `git status` and do not commit.
