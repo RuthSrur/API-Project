@@ -32,7 +32,7 @@ export default function Home({ characters, loading, error, favorites, onAddFavor
                 onAddFavorite={onAddFavorite}
                 onRemoveFavorite={onRemoveFavorite}
               />
-              <CharacterDetail character={selectedCharacter} />
+              <CharacterDetail key={selectedCharacter?.id ?? 'empty'} character={selectedCharacter} />
             </div>
           )}
         </>

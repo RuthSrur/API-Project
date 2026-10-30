@@ -29,7 +29,7 @@ export default function Favorites({ favorites, onRemoveFavorite }) {
           onRemoveFavorite={onRemoveFavorite}
           isFavoritesPage={true}
         />
-        <CharacterDetail character={selectedCharacter} />
+        <CharacterDetail key={selectedCharacter?.id ?? 'empty'} character={selectedCharacter} />
       </div>
     </main>
   )
