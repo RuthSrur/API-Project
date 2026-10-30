@@ -308,3 +308,24 @@ I checked: the location links
 > After adding a character to the favorites, when clicking again on the heart button it dosent remove the character from favorites
 
 I checked: clicking the heart on a character in Favorites deselects it.
+
+
+## 2026-10-13
+
+**23:49 · claude**
+> 
+> 1. Card Entrance Animation:
+>    - Add a subtle fade-in and slight slide-up animation (`@keyframes fadeInUp`) to `.character-card` when the list renders.
+>    - Keep the duration short and smooth (around 0.25s–0.3s ease-out).
+> 
+> 2. Interactive Micro-interactions:
+>    - Enhance the `.character-card:hover` transition with a smooth scale/lift effect (`transform: translateY(-4px); transition: transform 0.2s ease, box-shadow 0.2s ease;`).
+>    - Add an active/click press effect (`:active { transform: scale(0.98); }`).
+> 
+> 3. Detail Panel Transition:
+>    - When a new character is selected, add a smooth fade-in effect to the `.character-detail` content (`@keyframes fadeIn`) so changes feel fluid rather than abrupt.
+> 
+> 4. Accessibility:
+>    - Include a `@media (prefers-reduced-motion: reduce)` block that disables or simplifies animations for users sensitive to motion.
+> 
+> Do NOT install any external libraries. Explain what you added in 3 plain sentences.
