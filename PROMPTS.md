@@ -473,3 +473,25 @@ I checked: New routing menu and a home page.
  I checked: new tests and updated readme.
 **18:42 · claude**
 > yes
+
+**21:41 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Task 8. Show me a short plan first and wait for my approval.
+> 
+> 1. Reuse the existing `CharacterDetail` component: `CharacterPage.tsx` must render `<CharacterDetail />` instead of duplicating the detail markup. Move the favorite button into `CharacterDetail` through props if needed. Do not change how the page looks.
+> 2. Add a new Statistics page at `/stats`, in `src/pages/StatsPage.tsx`, with a "Stats" NavLink in the menu:
+>    - Show the total number of characters, the count by status (Alive / Dead / unknown), and the count by species.
+>    - Use the characters list already loaded in App (pass it with props). Show the loading and error states like the list page.
+>    - Create a new component `src/components/StatCard.tsx` (a label and a number), and render the cards with `map` and a unique `key`.
+> 3. Put the counting logic in pure functions in `src/utils/characters.ts` (e.g. `countByStatus`, `countBySpecies`) and add unit tests for them in `src/utils/characters.test.ts`.
+> 4. Use plain CSS in App.css, and make sure the page looks fine on a narrow screen. No `any`.
+> 5. Add task 8 to `tasks.md` with a "Done when:" line.
+> 6. Do not touch PROMPTS.md. Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
+> 
+> Explain in 3 plain sentences. Do not commit.
+
+**21:42 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> yes

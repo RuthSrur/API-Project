@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { formatCreatedDate, formatEpisodeCount, getLocationName, isFavorite } from '../utils/characters'
+import CharacterDetail from '../components/CharacterDetail'
+import { isFavorite } from '../utils/characters'
 import { Character } from '../types'
 
 interface CharacterPageProps {
@@ -53,8 +54,6 @@ export default function CharacterPage({
     }
   }
 
-  const isFavorited = isFavorite(favorites, character?.id || 0)
-
   return (
     <main className="app">
       <div className="character-page-container">
@@ -65,38 +64,13 @@ export default function CharacterPage({
             <Link to="/characters" className="character-page-back-link">
               ← Back to characters
             </Link>
-            <div className="character-detail character-page-detail">
-              <img src={character.image} alt={character.name} />
-              <h2>{character.name}</h2>
-              <p>
-                <strong>Status:</strong> {character.status}
-              </p>
-              <p>
-                <strong>Species:</strong> {character.species}
-              </p>
-              <p>
-                <strong>Gender:</strong> {character.gender}
-              </p>
-              <p>
-                <strong>Origin:</strong>{' '}
-                {character.origin?.name ||
-                  (typeof character.origin === 'string' ? character.origin : 'Unknown')}
-              </p>
-              <p>
-                <strong>📺 Episodes:</strong> {formatEpisodeCount(character.episode)}
-              </p>
-              <p>
-                <strong>📅 Created:</strong> {formatCreatedDate(character.created)}
-              </p>
-              <p>
-                <strong>🌍 Location:</strong> {getLocationName(character)}
-              </p>
-              <button
-                onClick={handleFavoriteClick}
-                className={`character-page-button ${isFavorited ? 'favorited' : ''}`}
-              >
-                {isFavorited ? '♥️ Remove from favorites' : '🤍 Add to favorites'}
-              </button>
+            <div className="character-page-detail">
+              <CharacterDetail
+                character={character}
+                onFavoriteClick={handleFavoriteClick}
+                isFavorited={isFavorite(favorites, character.id)}
+                showFavoriteButton
+              />
             </div>
           </>
         )}

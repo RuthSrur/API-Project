@@ -16,3 +16,5 @@
       *Done when:* אין console.log, כל הkey-ים ייחודיים, README מסביר את הסדרה.
 - [x] **7 · Routing עם React Router** — 5 עמודים: Landing (בית), Characters (רשימה עם חיפוש), Character/:id (פרטים), Favorites (מועדפים), NotFound (404). NavLink עם active styling, fetch by ID על הדף פרטים.
       *Done when:* כל הדפים נטענים, NavLink מציג active state, /characters/:id עובד עם refresh, כל הטסטים עוברים.
+- [x] **8 · Statistics** — דף /stats עם סטטיסטיקה: סה"כ דמויות, count by status (Alive/Dead/unknown), count by species. StatCard component, pure functions with unit tests, reuse CharacterDetail in CharacterPage.
+      *Done when:* /stats נטען עם סטטים, StatCard כרטיסים מציגים מספרים, countByStatus ו-countBySpecies עוברים tests, כל הטסטים עוברים.

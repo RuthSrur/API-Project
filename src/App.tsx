@@ -4,6 +4,7 @@ import Landing from './pages/Landing'
 import CharactersPage from './pages/CharactersPage'
 import CharacterPage from './pages/CharacterPage'
 import Favorites from './pages/Favorites'
+import StatsPage from './pages/StatsPage'
 import NotFound from './pages/NotFound'
 import { Character } from './types'
 import './App.css'
@@ -59,6 +60,9 @@ export default function App() {
             <NavLink to="/characters" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
               Characters
             </NavLink>
+            <NavLink to="/stats" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+              Stats
+            </NavLink>
             <NavLink to="/favorites" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
               Favorites ♥️ ({favorites.length})
             </NavLink>
@@ -87,6 +91,16 @@ export default function App() {
                 favorites={favorites}
                 onAddFavorite={addFavorite}
                 onRemoveFavorite={removeFavorite}
+              />
+            }
+          />
+          <Route
+            path="/stats"
+            element={
+              <StatsPage
+                characters={characters}
+                loading={loading}
+                error={error}
               />
             }
           />

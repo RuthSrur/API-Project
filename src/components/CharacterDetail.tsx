@@ -3,9 +3,17 @@ import { Character } from '../types'
 
 interface CharacterDetailProps {
   character: Character | null
+  onFavoriteClick?: () => void
+  isFavorited?: boolean
+  showFavoriteButton?: boolean
 }
 
-export default function CharacterDetail({ character }: CharacterDetailProps) {
+export default function CharacterDetail({
+  character,
+  onFavoriteClick,
+  isFavorited = false,
+  showFavoriteButton = false,
+}: CharacterDetailProps) {
   if (!character) {
     return (
       <div className="character-detail">
@@ -45,6 +53,14 @@ export default function CharacterDetail({ character }: CharacterDetailProps) {
       <p>
         <strong>🌍 Location:</strong> {locationName}
       </p>
+      {showFavoriteButton && onFavoriteClick && (
+        <button
+          onClick={onFavoriteClick}
+          className={`character-page-button ${isFavorited ? 'favorited' : ''}`}
+        >
+          {isFavorited ? '♥️ Remove from favorites' : '🤍 Add to favorites'}
+        </button>
+      )}
     </div>
   )
 }

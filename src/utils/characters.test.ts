@@ -6,6 +6,8 @@ import {
   getLocationName,
   isFavorite,
   toggleFavorite,
+  countByStatus,
+  countBySpecies,
 } from './characters'
 import { Character } from '../types'
 
@@ -167,5 +169,55 @@ describe('toggleFavorite', () => {
     const result = toggleFavorite(favorites, mockCharacters[0])
     expect(result).toHaveLength(1)
     expect(result[0].id).toBe(2)
+  })
+})
+
+describe('countByStatus', () => {
+  it('counts characters by status', () => {
+    const result = countByStatus(mockCharacters)
+    expect(result.Alive).toBe(2)
+    expect(result.Dead).toBe(0)
+    expect(result.unknown).toBe(0)
+  })
+
+  it('returns zero counts for empty array', () => {
+    const result = countByStatus([])
+    expect(result.Alive).toBe(0)
+    expect(result.Dead).toBe(0)
+    expect(result.unknown).toBe(0)
+  })
+
+  it('counts dead characters', () => {
+    const deadChar: Character = {
+      ...mockCharacters[0],
+      id: 99,
+      status: 'Dead',
+    }
+    const result = countByStatus([mockCharacters[0], deadChar])
+    expect(result.Alive).toBe(1)
+    expect(result.Dead).toBe(1)
+  })
+})
+
+describe('countBySpecies', () => {
+  it('counts characters by species', () => {
+    const result = countBySpecies(mockCharacters)
+    expect(result.Human).toBe(2)
+  })
+
+  it('returns empty object for empty array', () => {
+    const result = countBySpecies([])
+    expect(Object.keys(result)).toHaveLength(0)
+  })
+
+  it('counts multiple species', () => {
+    const alienChar: Character = {
+      ...mockCharacters[0],
+      id: 99,
+      species: 'Alien',
+    }
+    const result = countBySpecies([mockCharacters[0], mockCharacters[1], alienChar])
+    expect(result.Human).toBe(2)
+    expect(result.Alien).toBe(1)
   })
 })
