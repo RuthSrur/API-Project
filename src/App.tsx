@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, Link } from 'react-router-dom'
 import Landing from './pages/Landing'
 import CharactersPage from './pages/CharactersPage'
 import CharacterPage from './pages/CharacterPage'
@@ -52,11 +52,10 @@ export default function App() {
     <BrowserRouter>
       <div className="app-wrapper">
         <nav className="navbar">
-          <h1>Rick and Morty Explorer 🛸</h1>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h1>Rick and Morty Explorer 🛸</h1>
+          </Link>
           <div className="nav-links">
-            <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-              Home
-            </NavLink>
             <NavLink to="/characters" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
               Characters
             </NavLink>

@@ -18,7 +18,7 @@ export default function Favorites({ favorites, onRemoveFavorite }: FavoritesProp
   return (
     <main className="app">
       <div className="search-container">
-        <h2 style={{ margin: 0, fontSize: '18px', textAlign: 'center' }}>
+        <h2 className="page-title">
           Your Favorite Characters ({favorites.length})
         </h2>
       </div>

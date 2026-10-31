@@ -27,15 +27,15 @@ export default function CharactersPage({
 
   return (
     <main className="app">
-      {loading && <p>טוען דמויות...</p>}
-      {error && <p>שגיאה בטעינת הנתונים, אנא נסה שוב</p>}
+      {loading && <p>Loading characters...</p>}
+      {error && <p className="error-message">Failed to load data. Please try again.</p>}
       {!loading && !error && (
         <>
           <div className="search-container">
             <SearchBar value={searchTerm} onChange={setSearchTerm} />
           </div>
           {filteredCharacters.length === 0 ? (
-            <p className="no-results">לא נמצאו דמויות תואמות</p>
+            <p className="no-results">No characters match your search.</p>
           ) : (
             <div className="list-page-container">
               <CharacterList

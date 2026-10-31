@@ -57,7 +57,8 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 
 ### Navigation
 - **When I navigate to any URL not defined above (e.g., `/invalid`),** I see a 404 page with a link back home.
-- **When I click NavLink,** it shows active styling (darker background, underline) for the current page.
+- **When I click the app title** "Rick and Morty Explorer 🛸", **I navigate to the landing page** (`/`).
+- **When I click a NavLink** (Characters, Stats, Favorites), **it shows active styling** (darker background, underline) for the current page.
 
 ## 6. Data
 

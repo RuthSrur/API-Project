@@ -510,3 +510,32 @@ I checked: There is a new page of Statistics.
 > 5. Do not touch PROMPTS.md or any code.
 > 
 > Explain in 2 plain sentences. Do not commit.
+
+**21:57 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Final polish. Do not change any behavior.
+> 
+> 1. Move the remaining inline `style={{...}}` in `StatsPage.tsx`, `Favorites.tsx`, and `CharacterPage.tsx` into CSS classes in App.css.
+> 2. In `index.html`, set `<html lang="en" dir="ltr">` and change the `<title>` to "Rick and Morty Explorer".
+> 3. In `CharacterPage.tsx`, remove the `if (!id)` block inside the useEffect, so `npm run lint` shows no warnings.
+> 4. Translate the Hebrew loading, error, and "no results" messages in the pages to English so the UI is in one language. Update the 2 tests in App.test.tsx if they look for the Hebrew text.
+> 5. Do not touch PROMPTS.md.
+> 6. Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass with no warnings.
+> 
+> Explain in 2 plain sentences. Do not commit.
+
+**22:00 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Final polish. Do not change any behavior except item 5.
+> 
+> 1. Move the remaining inline `style={{...}}` in `StatsPage.tsx`, `Favorites.tsx`, and `CharacterPage.tsx` into CSS classes in App.css.
+> 2. In `index.html`, set `<html lang="en" dir="ltr">` and change the `<title>` to "Rick and Morty Explorer".
+> 3. In `CharacterPage.tsx`, remove the `if (!id)` block inside the useEffect, so `npm run lint` shows no warnings.
+> 4. Translate the Hebrew loading, error, and "no results" messages in the pages to English so the UI is in one language. Update the 2 tests in App.test.tsx if they look for the Hebrew text.
+> 5. Navigation menu: remove the "Home" NavLink. Keep only Characters, Favorites, and Stats. Make the "Rick and Morty Explorer 🛸" title in the navbar a `Link` to `/`, so users can still get back to the landing page. Keep the landing page at `/` as the first page users see when they open the site. Update PRD.md and README.md if they mention a Home link in the menu.
+> 6. Do not touch PROMPTS.md.
+> 7. Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass with no warnings.
+> 
+> Explain in 2 plain sentences. Do not commit.

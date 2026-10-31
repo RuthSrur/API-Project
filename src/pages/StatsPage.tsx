@@ -15,21 +15,21 @@ export default function StatsPage({ characters, loading, error }: StatsPageProps
 
   return (
     <main className="app">
-      {loading && <p>טוען נתונים...</p>}
-      {error && <p>שגיאה בטעינת הנתונים, אנא נסה שוב</p>}
+      {loading && <p>Loading statistics...</p>}
+      {error && <p className="error-message">Failed to load data. Please try again.</p>}
       {!loading && !error && (
         <div className="stats-page-container">
-          <h2 style={{ textAlign: 'center', marginBottom: '40px' }}>Statistics</h2>
+          <h2 className="stats-section-title">Statistics</h2>
 
-          <section style={{ marginBottom: '40px' }}>
-            <h3 style={{ marginBottom: '20px', fontSize: '18px' }}>Total Characters</h3>
+          <section className="stats-section">
+            <h3 className="stats-subsection-heading">Total Characters</h3>
             <div className="stats-grid">
               <StatCard key="total" label="Total" value={totalCount} />
             </div>
           </section>
 
-          <section style={{ marginBottom: '40px' }}>
-            <h3 style={{ marginBottom: '20px', fontSize: '18px' }}>By Status</h3>
+          <section className="stats-section">
+            <h3 className="stats-subsection-heading">By Status</h3>
             <div className="stats-grid">
               <StatCard key="alive" label="Alive" value={statusCounts.Alive} />
               <StatCard key="dead" label="Dead" value={statusCounts.Dead} />
@@ -38,7 +38,7 @@ export default function StatsPage({ characters, loading, error }: StatsPageProps
           </section>
 
           <section>
-            <h3 style={{ marginBottom: '20px', fontSize: '18px' }}>By Species</h3>
+            <h3 className="stats-subsection-heading">By Species</h3>
             <div className="stats-grid">
               {Object.entries(speciesCounts)
                 .sort(([, a], [, b]) => b - a)

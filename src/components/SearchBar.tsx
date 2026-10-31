@@ -14,7 +14,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
     <input
       type="text"
       className="search-input"
-      placeholder="חפש דמות..."
+      placeholder="Search characters..."
       value={value}
       onChange={handleChange}
     />

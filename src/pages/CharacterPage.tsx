@@ -21,12 +21,6 @@ export default function CharacterPage({
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!id) {
-      setError('No character ID provided')
-      setLoading(false)
-      return
-    }
-
     fetch(`https://rickandmortyapi.com/api/character/${id}`)
       .then(res => {
         if (!res.ok) {
@@ -57,8 +51,8 @@ export default function CharacterPage({
   return (
     <main className="app">
       <div className="character-page-container">
-        {loading && <p>טוען...</p>}
-        {error && <p style={{ color: '#dc2626' }}>{error}</p>}
+        {loading && <p>Loading...</p>}
+        {error && <p className="error-message">{error}</p>}
         {!loading && !error && character && (
           <>
             <Link to="/characters" className="character-page-back-link">

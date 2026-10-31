@@ -80,7 +80,7 @@ describe('App Component', () => {
       expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
     })
 
-    const searchInput = screen.getByPlaceholderText('חפש דמות...')
+    const searchInput = screen.getByPlaceholderText('Search characters...')
     await user.type(searchInput, 'Rick')
 
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
