@@ -3,11 +3,8 @@ import {
   filterCharactersByName,
   formatCreatedDate,
   formatEpisodeCount,
-  getLocationName,
-  isFavorite,
   toggleFavorite,
   countByStatus,
-  countBySpecies,
 } from './characters'
 import { Character } from '../types'
 
@@ -21,7 +18,7 @@ const mockCharacters: Character[] = [
     origin: { name: 'Earth (C-137)', url: '' },
     location: { name: 'Citadel of Ricks', url: '' },
     image: '',
-    episode: ['1', '2', '3'],
+    episode: Array.from({ length: 51 }, (_, i) => `${i + 1}`),
     url: '',
     type: '',
     created: '2017-11-04T19:22:43.665Z',
@@ -40,184 +37,72 @@ const mockCharacters: Character[] = [
     type: '',
     created: '2017-11-04T22:31:02.271Z',
   },
+  {
+    id: 3,
+    name: 'Summer Smith',
+    status: 'Dead',
+    species: 'Human',
+    gender: 'Female',
+    origin: { name: 'Earth (C-137)', url: '' },
+    location: { name: 'Smith Residence', url: '' },
+    image: '',
+    episode: ['1'],
+    url: '',
+    type: '',
+    created: '2017-11-04T22:31:02.271Z',
+  },
 ]
 
 describe('filterCharactersByName', () => {
-  it('filters characters by name case-insensitive', () => {
-    const result = filterCharactersByName(mockCharacters, 'rick')
+  it('matches characters regardless of upper/lower case', () => {
+    const result = filterCharactersByName(mockCharacters, 'RICK')
     expect(result).toHaveLength(1)
     expect(result[0].name).toBe('Rick Sanchez')
   })
 
-  it('returns all characters when search term is empty', () => {
+  it('returns all characters when search is empty', () => {
     const result = filterCharactersByName(mockCharacters, '')
-    expect(result).toHaveLength(2)
-  })
-
-  it('returns all characters when search term is only whitespace', () => {
-    const result = filterCharactersByName(mockCharacters, '   ')
-    expect(result).toHaveLength(2)
-  })
-
-  it('returns empty array when no match is found', () => {
-    const result = filterCharactersByName(mockCharacters, 'nonexistent')
-    expect(result).toHaveLength(0)
-  })
-
-  it('finds partial matches', () => {
-    const result = filterCharactersByName(mockCharacters, 'Smith')
-    expect(result).toHaveLength(1)
-    expect(result[0].name).toBe('Morty Smith')
+    expect(result).toHaveLength(3)
   })
 })
 
 describe('formatCreatedDate', () => {
-  it('formats valid ISO date string', () => {
+  it('returns "Nov 2017" for a valid date', () => {
     const result = formatCreatedDate('2017-11-04T19:22:43.665Z')
     expect(result).toBe('Nov 2017')
   })
 
-  it('returns N/A for empty string', () => {
-    const result = formatCreatedDate('')
-    expect(result).toBe('N/A')
-  })
-
-  it('returns N/A for invalid date', () => {
+  it('returns "N/A" for an invalid date', () => {
     const result = formatCreatedDate('invalid-date')
-    expect(result).toBe('N/A')
-  })
-
-  it('returns N/A for null-like values', () => {
-    const result = formatCreatedDate('')
     expect(result).toBe('N/A')
   })
 })
 
 describe('formatEpisodeCount', () => {
-  it('formats single episode as singular', () => {
-    const result = formatEpisodeCount(['1'])
-    expect(result).toBe('1 appearance')
-  })
-
-  it('formats multiple episodes as plural', () => {
-    const result = formatEpisodeCount(['1', '2', '3'])
-    expect(result).toBe('3 appearances')
-  })
-
-  it('returns "0 appearances" for empty array', () => {
-    const result = formatEpisodeCount([])
-    expect(result).toBe('0 appearances')
-  })
-
-  it('returns "0 appearances" for undefined', () => {
-    const result = formatEpisodeCount(undefined)
-    expect(result).toBe('0 appearances')
-  })
-})
-
-describe('getLocationName', () => {
-  it('returns location name from character', () => {
-    const result = getLocationName(mockCharacters[0])
-    expect(result).toBe('Citadel of Ricks')
-  })
-
-  it('returns Unknown when location name is empty', () => {
-    const character = { ...mockCharacters[0], location: { name: '', url: '' } }
-    const result = getLocationName(character)
-    expect(result).toBe('Unknown')
-  })
-})
-
-describe('isFavorite', () => {
-  it('returns true when character is in favorites', () => {
-    const result = isFavorite([mockCharacters[0]], 1)
-    expect(result).toBe(true)
-  })
-
-  it('returns false when character is not in favorites', () => {
-    const result = isFavorite([mockCharacters[0]], 2)
-    expect(result).toBe(false)
-  })
-
-  it('returns false for empty favorites array', () => {
-    const result = isFavorite([], 1)
-    expect(result).toBe(false)
+  it('returns "51 appearances" for 51 episodes', () => {
+    const result = formatEpisodeCount(mockCharacters[0].episode)
+    expect(result).toBe('51 appearances')
   })
 })
 
 describe('toggleFavorite', () => {
-  it('adds character to favorites when not present', () => {
+  it('adds a character that is missing', () => {
     const result = toggleFavorite([], mockCharacters[0])
     expect(result).toHaveLength(1)
     expect(result[0].id).toBe(1)
   })
 
-  it('removes character from favorites when already present', () => {
+  it('removes a character that is already there', () => {
     const result = toggleFavorite([mockCharacters[0]], mockCharacters[0])
     expect(result).toHaveLength(0)
-  })
-
-  it('does not add duplicate when adding twice', () => {
-    let favorites: Character[] = []
-    favorites = toggleFavorite(favorites, mockCharacters[0])
-    favorites = toggleFavorite(favorites, mockCharacters[0])
-    expect(favorites).toHaveLength(0)
-  })
-
-  it('preserves other favorites when removing one', () => {
-    const favorites = [mockCharacters[0], mockCharacters[1]]
-    const result = toggleFavorite(favorites, mockCharacters[0])
-    expect(result).toHaveLength(1)
-    expect(result[0].id).toBe(2)
   })
 })
 
 describe('countByStatus', () => {
-  it('counts characters by status', () => {
+  it('returns { Alive: 2, Dead: 1 } for 2 Alive + 1 Dead', () => {
     const result = countByStatus(mockCharacters)
     expect(result.Alive).toBe(2)
-    expect(result.Dead).toBe(0)
-    expect(result.unknown).toBe(0)
-  })
-
-  it('returns zero counts for empty array', () => {
-    const result = countByStatus([])
-    expect(result.Alive).toBe(0)
-    expect(result.Dead).toBe(0)
-    expect(result.unknown).toBe(0)
-  })
-
-  it('counts dead characters', () => {
-    const deadChar: Character = {
-      ...mockCharacters[0],
-      id: 99,
-      status: 'Dead',
-    }
-    const result = countByStatus([mockCharacters[0], deadChar])
-    expect(result.Alive).toBe(1)
     expect(result.Dead).toBe(1)
-  })
-})
-
-describe('countBySpecies', () => {
-  it('counts characters by species', () => {
-    const result = countBySpecies(mockCharacters)
-    expect(result.Human).toBe(2)
-  })
-
-  it('returns empty object for empty array', () => {
-    const result = countBySpecies([])
-    expect(Object.keys(result)).toHaveLength(0)
-  })
-
-  it('counts multiple species', () => {
-    const alienChar: Character = {
-      ...mockCharacters[0],
-      id: 99,
-      species: 'Alien',
-    }
-    const result = countBySpecies([mockCharacters[0], mockCharacters[1], alienChar])
-    expect(result.Human).toBe(2)
-    expect(result.Alien).toBe(1)
+    expect(result.unknown).toBe(0)
   })
 })

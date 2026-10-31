@@ -476,7 +476,6 @@ I checked: New routing menu and a home page.
 
 **21:41 · claude**
 
-> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > Task 8. Show me a short plan first and wait for my approval.
 > 
 > 1. Reuse the existing `CharacterDetail` component: `CharacterPage.tsx` must render `<CharacterDetail />` instead of duplicating the detail markup. Move the favorite button into `CharacterDetail` through props if needed. Do not change how the page looks.
@@ -490,8 +489,24 @@ I checked: New routing menu and a home page.
 > 6. Do not touch PROMPTS.md. Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
 > 
 > Explain in 3 plain sentences. Do not commit.
+I checked: There is a new page of Statistics.
 
 **21:42 · claude**
 
-> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > yes
+
+**21:48 · claude**
+
+> Task 9 — update the docs so they match the app as it is now. Change only documentation files.
+> 
+> 1. Rewrite `PRD.md` (keep the same section structure):
+>    - Screens: Landing `/`, Characters list `/characters`, Character details `/characters/:id`, Favorites `/favorites`, Stats `/stats`, 404.
+>    - Acceptance criteria in "When I…, I see…" form for every page.
+>    - Remove the side panel text, and move Favorites and React Router out of "Not Now".
+>    - Data: both API endpoints and the fields used.
+> 2. Create `docs/architecture.md`: the component and page tree, which component owns which state, how data flows through props, and where `fetch` happens. Link to it from `PRD.md`.
+> 3. Make sure `README.md` mentions the Stats page and says there are 10 tests.
+> 4. Add task 9 to `tasks.md` with a "Done when:" line.
+> 5. Do not touch PROMPTS.md or any code.
+> 
+> Explain in 2 plain sentences. Do not commit.

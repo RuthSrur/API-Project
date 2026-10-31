@@ -18,3 +18,5 @@
       *Done when:* כל הדפים נטענים, NavLink מציג active state, /characters/:id עובד עם refresh, כל הטסטים עוברים.
 - [x] **8 · Statistics** — דף /stats עם סטטיסטיקה: סה"כ דמויות, count by status (Alive/Dead/unknown), count by species. StatCard component, pure functions with unit tests, reuse CharacterDetail in CharacterPage.
       *Done when:* /stats נטען עם סטטים, StatCard כרטיסים מציגים מספרים, countByStatus ו-countBySpecies עוברים tests, כל הטסטים עוברים.
+- [x] **9 · Documentation** — PRD.md עם 6 דפים וקריטריונים, docs/architecture.md עם component tree ודאטה flow, README.md עם Stats ו-10 בדיקות.
+      *Done when:* PRD.md מכסה את כל העמודים והקריטריונים, architecture.md מתאר את כל הרכיבים וזרימת הנתונים, README.md מאומת ל-Stats ו-10 בדיקות.
