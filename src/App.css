@@ -283,6 +283,117 @@ body {
   margin: 0 auto;
 }
 
+/* Landing page */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.landing-title {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.error-title {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #dc2626;
+}
+
+.landing-description {
+  font-size: 18px;
+  color: #6b7280;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.landing-button,
+.primary-button {
+  display: inline-block;
+  padding: 12px 32px;
+  background-color: #3b82f6;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.landing-button:hover,
+.primary-button:hover {
+  background-color: #1e40af;
+  transform: translateY(-2px);
+}
+
+/* Character pages */
+.character-page-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.character-page-back-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.character-page-back-link:hover {
+  text-decoration: underline;
+}
+
+.character-page-detail {
+  position: relative;
+  margin-top: 20px;
+}
+
+.character-page-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.character-page-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.character-page-button.favorited {
+  background-color: #fecaca;
+}
+
+/* List pages container */
+.list-page-container {
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Character card link */
+.character-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Scrollbar styling */
 .character-list::-webkit-scrollbar,
 .character-detail::-webkit-scrollbar {

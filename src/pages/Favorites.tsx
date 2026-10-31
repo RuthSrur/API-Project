@@ -22,7 +22,7 @@ export default function Favorites({ favorites, onRemoveFavorite }: FavoritesProp
           Your Favorite Characters ({favorites.length})
         </h2>
       </div>
-      <div style={{ padding: '0 20px', maxWidth: '1400px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
+      <div className="list-page-container">
         <CharacterList
           characters={favorites}
           favorites={favorites}

@@ -26,10 +26,7 @@ export default function CharacterCard({
   }
 
   return (
-    <Link
-      to={`/characters/${character.id}`}
-      style={{ textDecoration: 'none', color: 'inherit' }}
-    >
+    <Link to={`/characters/${character.id}`} className="character-card-link">
       <div className="character-card">
         <div className="card-image-wrapper">
           <img src={character.image} alt={character.name} />

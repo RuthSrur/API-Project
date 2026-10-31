@@ -53,17 +53,19 @@ export default function CharacterPage({
     }
   }
 
+  const isFavorited = favorites.some(fav => fav.id === character?.id)
+
   return (
     <main className="app">
-      <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+      <div className="character-page-container">
         {loading && <p>טוען...</p>}
         {error && <p style={{ color: '#dc2626' }}>{error}</p>}
         {!loading && !error && character && (
           <>
-            <Link to="/characters" style={{ color: '#3b82f6', textDecoration: 'none', fontSize: '14px', marginBottom: '20px', display: 'inline-block' }}>
+            <Link to="/characters" className="character-page-back-link">
               ← Back to characters
             </Link>
-            <div className="character-detail" style={{ position: 'relative', top: 'auto', marginTop: '20px' }}>
+            <div className="character-detail character-page-detail">
               <img src={character.image} alt={character.name} />
               <h2>{character.name}</h2>
               <p>
@@ -96,28 +98,9 @@ export default function CharacterPage({
               </p>
               <button
                 onClick={handleFavoriteClick}
-                style={{
-                  marginTop: '20px',
-                  padding: '10px 20px',
-                  backgroundColor: favorites.some(fav => fav.id === character.id) ? '#fecaca' : '#ffffff',
-                  border: '1px solid #d1d5db',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontSize: '16px',
-                  fontWeight: '500',
-                  transition: 'all 0.2s ease',
-                  width: '100%',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.transform = 'translateY(-2px)'
-                  ;(e.target as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.transform = 'translateY(0)'
-                  ;(e.target as HTMLElement).style.boxShadow = 'none'
-                }}
+                className={`character-page-button ${isFavorited ? 'favorited' : ''}`}
               >
-                {favorites.some(fav => fav.id === character.id) ? '♥️ Remove from favorites' : '🤍 Add to favorites'}
+                {isFavorited ? '♥️ Remove from favorites' : '🤍 Add to favorites'}
               </button>
             </div>
           </>

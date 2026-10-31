@@ -334,7 +334,6 @@ I checked: clicking the heart on a character in Favorites deselects it.
 
 **11:25 · claude**
 
-> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > Remove the `.a5c/` folder from the Git repository and prevent it from being committed again.
 > 
 > 1. Add `.a5c/` to `.gitignore`, under a short comment explaining it is a local Claude plugin cache.
@@ -348,7 +347,6 @@ I checked: clicking the heart on a character in Favorites deselects it.
 
 **11:33 · claude**
 
-> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > The fadeIn animation on `.character-detail` only plays on first load, not when switching between characters, because React reuses the same DOM element.
 > 
 > Fix it by adding `key={selectedCharacter?.id ?? 'empty'}` to `<CharacterDetail />` in both `src/pages/Home.jsx` and `src/pages/Favorites.jsx`, so the panel remounts and the animation replays on every selection.
@@ -384,8 +382,6 @@ I checked: clicking the heart on a character in Favorites deselects it.
 > yes
 
 **11:54 · claude**
-
-> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > The migration left duplicate files. Please clean up:
 > 
 > 1. Delete the old JavaScript files that now have TypeScript versions: `vite.config.js`, `src/main.jsx`, `src/App.jsx`, `src/setupTests.js`, `src/__tests__/App.test.jsx`, all `.jsx` files in `src/components/` and `src/pages/`.
@@ -399,8 +395,6 @@ I checked: clicking the heart on a character in Favorites deselects it.
 ## 2026-10-31
 
 **18:11 · claude**
-
-> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 > Update the routing to meet this course requirement:
 > "Routing with React Router: a list page, a details page with its own URL (/items/:id), and at least two more pages. A navigation menu between pages using Link or NavLink."
 > 
@@ -435,3 +429,12 @@ I checked: clicking the heart on a character in Favorites deselects it.
 **18:14 · claude**
 
 > yes
+
+**18:32 · claude**
+> Small cleanup of the routing work:
+> 
+> 1. Move all inline `style={{...}}` from `CharacterPage.tsx`, `CharactersPage.tsx`, and `CharacterCard.tsx` into CSS classes in `App.css`. Replace the `onMouseEnter`/`onMouseLeave` style changes with a CSS `:hover` rule.
+> 2. Do not change behavior or how anything looks. Do not touch PROMPTS.md.
+> 3. Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
+> 
+> Explain in 2 plain sentences. Do not commit.

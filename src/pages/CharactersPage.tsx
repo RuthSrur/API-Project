@@ -38,7 +38,7 @@ export default function CharactersPage({
           {filteredCharacters.length === 0 ? (
             <p className="no-results">לא נמצאו דמויות תואמות</p>
           ) : (
-            <div style={{ padding: '0 20px', maxWidth: '1400px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
+            <div className="list-page-container">
               <CharacterList
                 characters={filteredCharacters}
                 favorites={favorites}
