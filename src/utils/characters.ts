@@ -61,3 +61,8 @@ export function countBySpecies(characters: Character[]): Record<string, number> 
     {} as Record<string, number>
   )
 }
+
+export function toPercent(count: number, total: number): number {
+  if (total === 0) return 0
+  return Math.round((count / total) * 100)
+}

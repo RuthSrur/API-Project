@@ -1,5 +1,5 @@
 import StatCard from '../components/StatCard'
-import { countByStatus, countBySpecies } from '../utils/characters'
+import { countByStatus, countBySpecies, toPercent } from '../utils/characters'
 import { Character } from '../types'
 
 interface StatsPageProps {
@@ -22,28 +22,46 @@ export default function StatsPage({ characters, loading, error }: StatsPageProps
           <h2 className="stats-section-title">Statistics</h2>
 
           <section className="stats-section">
-            <h3 className="stats-subsection-heading">Total Characters</h3>
+            <h3 className="stats-subsection-heading">Overview</h3>
             <div className="stats-grid">
               <StatCard key="total" label="Total" value={totalCount} />
+              <StatCard
+                key="alive"
+                label="Alive"
+                value={statusCounts.Alive}
+                variant="alive"
+                percent={toPercent(statusCounts.Alive, totalCount)}
+              />
+              <StatCard
+                key="dead"
+                label="Dead"
+                value={statusCounts.Dead}
+                variant="dead"
+                percent={toPercent(statusCounts.Dead, totalCount)}
+              />
+              <StatCard
+                key="unknown"
+                label="Unknown"
+                value={statusCounts.unknown}
+                variant="unknown"
+                percent={toPercent(statusCounts.unknown, totalCount)}
+              />
             </div>
           </section>
 
           <section className="stats-section">
-            <h3 className="stats-subsection-heading">By Status</h3>
-            <div className="stats-grid">
-              <StatCard key="alive" label="Alive" value={statusCounts.Alive} />
-              <StatCard key="dead" label="Dead" value={statusCounts.Dead} />
-              <StatCard key="unknown" label="Unknown" value={statusCounts.unknown} />
-            </div>
-          </section>
-
-          <section>
             <h3 className="stats-subsection-heading">By Species</h3>
             <div className="stats-grid">
               {Object.entries(speciesCounts)
                 .sort(([, a], [, b]) => b - a)
                 .map(([species, count]) => (
-                  <StatCard key={species} label={species} value={count} />
+                  <StatCard
+                    key={species}
+                    label={species}
+                    value={count}
+                    percent={toPercent(count, totalCount)}
+                    isSmall
+                  />
                 ))}
             </div>
           </section>

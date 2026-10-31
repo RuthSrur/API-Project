@@ -5,6 +5,7 @@ import {
   formatEpisodeCount,
   toggleFavorite,
   countByStatus,
+  toPercent,
 } from './characters'
 import { Character } from '../types'
 
@@ -104,5 +105,17 @@ describe('countByStatus', () => {
     expect(result.Alive).toBe(2)
     expect(result.Dead).toBe(1)
     expect(result.unknown).toBe(0)
+  })
+})
+
+describe('toPercent', () => {
+  it('returns 0 when total is 0', () => {
+    const result = toPercent(5, 0)
+    expect(result).toBe(0)
+  })
+
+  it('returns rounded percent correctly', () => {
+    const result = toPercent(2, 3)
+    expect(result).toBe(67)
   })
 })
