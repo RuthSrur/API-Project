@@ -81,6 +81,12 @@ body {
   background-color: #eff6ff;
 }
 
+.nav-link.active {
+  color: #1e40af;
+  background-color: #dbeafe;
+  border-bottom: 2px solid #1e40af;
+}
+
 .app {
   flex: 1;
   display: flex;

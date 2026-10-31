@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import CharacterList from '../components/CharacterList'
-import CharacterDetail from '../components/CharacterDetail'
 import SearchBar from '../components/SearchBar'
 import { Character } from '../types'
 
-interface HomeProps {
+interface CharactersPageProps {
   characters: Character[]
   loading: boolean
   error: string | null
@@ -13,15 +12,14 @@ interface HomeProps {
   onRemoveFavorite: (characterId: number) => void
 }
 
-export default function Home({
+export default function CharactersPage({
   characters,
   loading,
   error,
   favorites,
   onAddFavorite,
   onRemoveFavorite,
-}: HomeProps) {
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
+}: CharactersPageProps) {
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredCharacters = characters.filter(char =>
@@ -40,16 +38,13 @@ export default function Home({
           {filteredCharacters.length === 0 ? (
             <p className="no-results">לא נמצאו דמויות תואמות</p>
           ) : (
-            <div className="main-content">
+            <div style={{ padding: '0 20px', maxWidth: '1400px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
               <CharacterList
                 characters={filteredCharacters}
-                onSelectCharacter={setSelectedCharacter}
-                selectedId={selectedCharacter?.id}
                 favorites={favorites}
                 onAddFavorite={onAddFavorite}
                 onRemoveFavorite={onRemoveFavorite}
               />
-              <CharacterDetail key={selectedCharacter?.id ?? 'empty'} character={selectedCharacter} />
             </div>
           )}
         </>

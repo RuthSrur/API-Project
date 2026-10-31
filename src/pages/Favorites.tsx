@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import CharacterList from '../components/CharacterList'
-import CharacterDetail from '../components/CharacterDetail'
 import { Character } from '../types'
 
 interface FavoritesProps {
@@ -9,12 +7,10 @@ interface FavoritesProps {
 }
 
 export default function Favorites({ favorites, onRemoveFavorite }: FavoritesProps) {
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
-
   if (favorites.length === 0) {
     return (
       <main className="app">
-        <p className="no-results">No favorites yet. Add your favorite characters from Home! ♥️</p>
+        <p className="no-results">No favorites yet. Add your favorite characters from Characters! ♥️</p>
       </main>
     )
   }
@@ -26,16 +22,12 @@ export default function Favorites({ favorites, onRemoveFavorite }: FavoritesProp
           Your Favorite Characters ({favorites.length})
         </h2>
       </div>
-      <div className="main-content">
+      <div style={{ padding: '0 20px', maxWidth: '1400px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
         <CharacterList
           characters={favorites}
-          onSelectCharacter={setSelectedCharacter}
-          selectedId={selectedCharacter?.id}
           favorites={favorites}
           onRemoveFavorite={onRemoveFavorite}
-          isFavoritesPage={true}
         />
-        <CharacterDetail key={selectedCharacter?.id ?? 'empty'} character={selectedCharacter} />
       </div>
     </main>
   )

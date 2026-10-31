@@ -1,26 +1,22 @@
 import { MouseEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { Character } from '../types'
 
 interface CharacterCardProps {
   character: Character
-  onSelectCharacter: (character: Character) => void
-  isActive: boolean
   isFavorited: boolean
   onAddFavorite?: (character: Character) => void
   onRemoveFavorite?: (characterId: number) => void
-  isFavoritesPage?: boolean
 }
 
 export default function CharacterCard({
   character,
-  onSelectCharacter,
-  isActive,
   isFavorited,
   onAddFavorite,
   onRemoveFavorite,
-  isFavoritesPage,
 }: CharacterCardProps) {
   const handleFavoriteClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     e.stopPropagation()
     if (isFavorited && onRemoveFavorite) {
       onRemoveFavorite(character.id)
@@ -30,21 +26,23 @@ export default function CharacterCard({
   }
 
   return (
-    <div
-      className={`character-card ${isActive ? 'active' : ''}`}
-      onClick={() => onSelectCharacter(character)}
+    <Link
+      to={`/characters/${character.id}`}
+      style={{ textDecoration: 'none', color: 'inherit' }}
     >
-      <div className="card-image-wrapper">
-        <img src={character.image} alt={character.name} />
-        <button
-          className={`favorite-btn ${isFavorited ? 'favorited' : ''}`}
-          onClick={handleFavoriteClick}
-          title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
-        >
-          {isFavorited ? '♥️' : '🤍'}
-        </button>
+      <div className="character-card">
+        <div className="card-image-wrapper">
+          <img src={character.image} alt={character.name} />
+          <button
+            className={`favorite-btn ${isFavorited ? 'favorited' : ''}`}
+            onClick={handleFavoriteClick}
+            title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            {isFavorited ? '♥️' : '🤍'}
+          </button>
+        </div>
+        <h2>{character.name}</h2>
       </div>
-      <h2>{character.name}</h2>
-    </div>
+    </Link>
   )
 }

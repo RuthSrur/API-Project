@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Home from './pages/Home'
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import Landing from './pages/Landing'
+import CharactersPage from './pages/CharactersPage'
+import CharacterPage from './pages/CharacterPage'
 import Favorites from './pages/Favorites'
+import NotFound from './pages/NotFound'
 import { Character } from './types'
 import './App.css'
 
@@ -50,21 +53,37 @@ export default function App() {
         <nav className="navbar">
           <h1>Rick and Morty Explorer 🛸</h1>
           <div className="nav-links">
-            <Link to="/" className="nav-link">Home</Link>
-            <Link to="/favorites" className="nav-link">
+            <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+              Home
+            </NavLink>
+            <NavLink to="/characters" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+              Characters
+            </NavLink>
+            <NavLink to="/favorites" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
               Favorites ♥️ ({favorites.length})
-            </Link>
+            </NavLink>
           </div>
         </nav>
 
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route
-            path="/"
+            path="/characters"
             element={
-              <Home
+              <CharactersPage
                 characters={characters}
                 loading={loading}
                 error={error}
+                favorites={favorites}
+                onAddFavorite={addFavorite}
+                onRemoveFavorite={removeFavorite}
+              />
+            }
+          />
+          <Route
+            path="/characters/:id"
+            element={
+              <CharacterPage
                 favorites={favorites}
                 onAddFavorite={addFavorite}
                 onRemoveFavorite={removeFavorite}
@@ -80,6 +99,7 @@ export default function App() {
               />
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>

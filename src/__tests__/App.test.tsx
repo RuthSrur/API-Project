@@ -53,21 +53,31 @@ describe('App Component', () => {
   beforeEach(() => {
     vi.stubGlobal(
       'fetch',
-      vi.fn(() =>
-        Promise.resolve({
+      vi.fn((url: string) => {
+        if (url.includes('/character/1')) {
+          return Promise.resolve({
+            ok: true,
+            json: () => Promise.resolve(mockCharacters[0]),
+          })
+        }
+        return Promise.resolve({
           ok: true,
           json: () => Promise.resolve({ results: mockCharacters }),
         })
-      )
+      })
     )
   })
 
-  it('filters characters by name when typing in search bar (PRD acceptance criterion)', async () => {
+  it('filters characters by name when typing in search bar on characters page', async () => {
     const user = userEvent.setup()
     render(<App />)
 
+    const allLinks = screen.getAllByRole('link')
+    const charactersLink = allLinks.find(link => link.textContent === 'Characters')!
+    await user.click(charactersLink)
+
     await waitFor(() => {
-        expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
+      expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
     })
 
     const searchInput = screen.getByPlaceholderText('חפש דמות...')
@@ -78,20 +88,27 @@ describe('App Component', () => {
     expect(screen.queryByText('Summer Smith')).not.toBeInTheDocument()
   })
 
-  it('displays character details when a card is clicked', async () => {
+  it('navigates to character detail page when clicking a card', async () => {
     const user = userEvent.setup()
     render(<App />)
 
+    const allLinks = screen.getAllByRole('link')
+    const charactersLink = allLinks.find(link => link.textContent === 'Characters')!
+    await user.click(charactersLink)
+
     await waitFor(() => {
-        expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
+      expect(screen.getByText('Rick Sanchez')).toBeInTheDocument()
     })
 
-    const rickCard = screen.getAllByText('Rick Sanchez')[0]
-    await user.click(rickCard)
+    const cardLinks = screen.getAllByRole('link')
+    const rickCardLink = cardLinks.find(link => link.textContent?.includes('Rick Sanchez'))!
+    await user.click(rickCardLink)
 
-    expect(screen.queryByText('Select a character to view details')).not.toBeInTheDocument()
-    expect(screen.getByText('Alive')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Alive')).toBeInTheDocument()
+    })
     expect(screen.getByText('Human')).toBeInTheDocument()
     expect(screen.getByText('Earth (C-137)')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Back to characters/ })).toBeInTheDocument()
   })
 })

@@ -395,3 +395,43 @@ I checked: clicking the heart on a character in Favorites deselects it.
 > 5. Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
 > 
 > Show me the final `git status` and do not commit.
+
+## 2026-10-31
+
+**18:11 · claude**
+
+> <ide_opened_file>The user opened the file /Users/ruthsr/web-development/react-project-starter/PROMPTS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+> Update the routing to meet this course requirement:
+> "Routing with React Router: a list page, a details page with its own URL (/items/:id), and at least two more pages. A navigation menu between pages using Link or NavLink."
+> 
+> This is a big change, so first show me a short plan and wait for my approval.
+> 
+> Target routes:
+> - `/` → new `Landing` page: a short welcome title, one sentence about the app, and a "Browse characters" button (a Link to `/characters`).
+> - `/characters` → the current list page with search (move what is in `Home` today here and rename it to `CharactersPage`).
+> - `/characters/:id` → new `CharacterPage` details page.
+> - `/favorites` → the existing Favorites page.
+> - `*` → new `NotFound` page with a Link back home.
+> 
+> Requirements:
+> 1. Navigation menu: use `NavLink` (not `Link`) for Home, Characters, and Favorites, and give the active link an `active` style in App.css. Keep the favorites count.
+> 2. Details page:
+>    - Read the id with `useParams`.
+>    - Fetch the character from `https://rickandmortyapi.com/api/character/{id}`, so the page works on refresh or when the URL is opened directly.
+>    - Show a loading state and an error state. If the character doesn't exist, show a "Character not found" message.
+>    - Show all the details we show today (image, status, species, episode count, created date, location) and a favorite button.
+>    - Add a "← Back to characters" Link.
+> 3. List page: clicking a card navigates to `/characters/:id`. Remove the side detail panel from the list page and from Favorites, because the details page replaces it. Clicking the heart button on a card must toggle the favorite only, without navigating (stop the click from reaching the card).
+> 4. Favorites page: cards link to `/characters/:id` as well.
+> 5. Keep the existing fade-in animation on the details page, and keep everything typed with TypeScript (no `any`).
+> 6. Each page goes in `src/pages/`, one component per file.
+> 7. Update `tasks.md`: fill in task 7 with this routing work and a "Done when" line.
+> 8. Update the existing tests if they break, and add one test showing that `/characters/1` renders the details page.
+> 9. Do not touch PROMPTS.md, scripts/, .claude/, .codex/, .gemini/, or .agents/.
+> 10. Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
+> 
+> At the end, list the changed files and explain what changed in 3 plain sentences. Do not commit.
+
+**18:14 · claude**
+
+> yes
