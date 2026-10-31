@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { formatCreatedDate, formatEpisodeCount, getLocationName, isFavorite } from '../utils/characters'
 import { Character } from '../types'
 
 interface CharacterPageProps {
@@ -45,15 +46,14 @@ export default function CharacterPage({
 
   const handleFavoriteClick = () => {
     if (!character) return
-    const isFavorited = favorites.some(fav => fav.id === character.id)
-    if (isFavorited) {
+    if (isFavorite(favorites, character.id)) {
       onRemoveFavorite(character.id)
     } else {
       onAddFavorite(character)
     }
   }
 
-  const isFavorited = favorites.some(fav => fav.id === character?.id)
+  const isFavorited = isFavorite(favorites, character?.id || 0)
 
   return (
     <main className="app">
@@ -83,18 +83,13 @@ export default function CharacterPage({
                   (typeof character.origin === 'string' ? character.origin : 'Unknown')}
               </p>
               <p>
-                <strong>📺 Episodes:</strong> {character.episode?.length || 0}{' '}
-                {(character.episode?.length || 0) === 1 ? 'appearance' : 'appearances'}
+                <strong>📺 Episodes:</strong> {formatEpisodeCount(character.episode)}
               </p>
               <p>
-                <strong>📅 Created:</strong>{' '}
-                {new Date(character.created).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                })}
+                <strong>📅 Created:</strong> {formatCreatedDate(character.created)}
               </p>
               <p>
-                <strong>🌍 Location:</strong> {character.location?.name || 'Unknown'}
+                <strong>🌍 Location:</strong> {getLocationName(character)}
               </p>
               <button
                 onClick={handleFavoriteClick}

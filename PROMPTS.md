@@ -430,6 +430,8 @@ I checked: clicking the heart on a character in Favorites deselects it.
 
 > yes
 
+I checked: New routing menu and a home page.
+
 **18:32 · claude**
 > Small cleanup of the routing work:
 > 
@@ -438,3 +440,36 @@ I checked: clicking the heart on a character in Favorites deselects it.
 > 3. Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
 > 
 > Explain in 2 plain sentences. Do not commit.
+
+**18:40 · claude**
+
+> Two course requirements are still missing. Show me a short plan first and wait for my approval.
+> 
+> Part 1 — Unit tests:
+> 1. Move the logic out of the components into pure functions in `src/utils/characters.ts`, for example:
+>    - `filterCharactersByName(characters, searchTerm)`: case-insensitive, trims spaces, and an empty term returns all.
+>    - `formatCreatedDate(isoString)`: returns e.g. "Nov 2017", and "N/A" for a missing or invalid date.
+>    - `formatEpisodeCount(episodes)`: returns "1 appearance" / "51 appearances", and handles a missing list.
+>    - `getLocationName(character)`: returns "Unknown" when the location is missing.
+>    - `isFavorite(favorites, id)` and `toggleFavorite(favorites, character)`: adds a character if missing and removes it if present, with no duplicates.
+>    Use these functions in the components instead of the inline logic. Do not change behavior or how anything looks.
+> 2. Write unit tests in `src/utils/characters.test.ts`. Write at least 8 tests in total, covering normal cases and edge cases (empty search, mixed case, missing data, adding a favorite twice).
+> 3. `@vitest/ui` is already installed. Add the script `"test:ui": "vitest --ui"` to package.json.
+> 4. Keep the existing tests in `src/__tests__/App.test.tsx`.
+> 
+> Part 2 — README.md:
+> Rewrite README.md in Hebrew so it covers:
+> - What the app does: a landing page, a characters list with search, a character details page at `/characters/:id`, favorites saved in localStorage, and a 404 page.
+> - The tech: React, TypeScript, Vite, React Router, Vitest.
+> - How to run it: `npm install`, then `npm run dev`.
+> - How to run the tests: `npm test` and `npm run test:ui`.
+> - The API used: Rick and Morty API, with both endpoints (`/api/character` and `/api/character/{id}`).
+> Remove the outdated text about the side detail panel and `selectedCharacter`.
+> 
+> Do not touch PROMPTS.md, scripts/, .claude/, .codex/, .gemini/, or .agents/.
+> Run `npm run typecheck`, `npm test`, and `npm run build`. All three must pass.
+> At the end, show the `npm test` output and explain in 3 plain sentences. Do not commit.
+ 
+ I checked: new tests and updated readme.
+**18:42 · claude**
+> yes

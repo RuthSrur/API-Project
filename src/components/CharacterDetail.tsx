@@ -1,3 +1,4 @@
+import { formatCreatedDate, formatEpisodeCount, getLocationName } from '../utils/characters'
 import { Character } from '../types'
 
 interface CharacterDetailProps {
@@ -13,14 +14,9 @@ export default function CharacterDetail({ character }: CharacterDetailProps) {
     )
   }
 
-  const episodeCount = character.episode?.length || 0
-  const createdDate = character.created
-    ? new Date(character.created).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-      })
-    : 'N/A'
-  const locationName = character.location?.name || 'Unknown'
+  const episodeCountText = formatEpisodeCount(character.episode)
+  const createdDate = formatCreatedDate(character.created)
+  const locationName = getLocationName(character)
 
   return (
     <div className="character-detail">
@@ -41,8 +37,7 @@ export default function CharacterDetail({ character }: CharacterDetailProps) {
           (typeof character.origin === 'string' ? character.origin : 'Unknown')}
       </p>
       <p>
-        <strong>📺 Episodes:</strong> {episodeCount}{' '}
-        {episodeCount === 1 ? 'appearance' : 'appearances'}
+        <strong>📺 Episodes:</strong> {episodeCountText}
       </p>
       <p>
         <strong>📅 Created:</strong> {createdDate}

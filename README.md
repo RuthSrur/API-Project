@@ -1,12 +1,27 @@
 # Rick and Morty Explorer 🛸
 
-אפליקציית Web מבוססת React + Vite בתצורת Master-Detail המציגה דמויות מתוך הסדרה "ריק ומורטי".
+אפליקציית Web אינטראקטיבית בנויה ב-React + TypeScript המציגה דמויות מסדרת "ריק ומורטי" עם חיפוש, פרטים עמוקים, והטבעת מועדפים.
 
-## תיאור
+## מה האפליקציה עושה
 
-אפליקציה אינטראקטיבית שמאפשרת לחפש וצפות בדמויות מסדרת Rick and Morty. ממשק דו-עמודה עם רשימת חיפוש בצד שמאל ופאנל פרטים דינמי בצד ימין.
+- **עמוד כניסה** — דף ברוכים הבאים עם כפתור לעיון בדמויות
+- **רשימת דמויות** — חיפוש בזמן אמת בשם הדמות בעמוד `/characters`
+- **עמוד פרטים** — מידע מלא על כל דמות בנתיב `/characters/:id`, עם הטבעת מועדפים
+- **מועדפים** — שמירת דמויות אהובות ב-localStorage בעמוד `/favorites`
+- **עמוד 404** — הדרכה חזרה הביתה עבור דפים שלא קיימים
+
+## הטכנולוגיה
+
+- **React 19** — ממשק משתמש עם hooks (useState, useEffect, useParams)
+- **TypeScript** — type safety חזק (`strict: true`)
+- **Vite** — בנייה וקדם-עיבוד מהירים
+- **React Router** — ניווט בין 5 עמודים עם NavLink ופעילות active state
+- **Vitest** — בדיקות יחידה (unit tests) של פונקציות עזר
+- **localStorage** — שמירה קבועה של מועדפים
 
 ## התחלה מהירה
+
+### התקנה והפעלה
 
 ```bash
 npm install
@@ -15,17 +30,68 @@ npm run dev
 
 פתח את `http://localhost:5173` בדפדפן.
 
+### בדיקות
+
+```bash
+# הרץ את כל הבדיקות
+npm test
+
+# פתח את Vitest UI (יישומון אינטראקטיבי לבדיקות)
+npm run test:ui
+```
+
+### בנייה
+
+```bash
+npm run build
+```
+
 ## API
 
-האפליקציה משתמשת ב-[Rick and Morty API](https://rickandmortyapi.com/api/character):
+האפליקציה משתמשת ב-[Rick and Morty API](https://rickandmortyapi.com/):
+
+- **רשימת דמויות**: `GET https://rickandmortyapi.com/api/character`
+- **דמות בודדת**: `GET https://rickandmortyapi.com/api/character/{id}`
+
+כל קריאה כוללת טעינה ותיקייה מצב שגיאה.
+
+## מבנה הפרויקט
+
 ```
-GET https://rickandmortyapi.com/api/character
+src/
+├── pages/              # 5 דפי ניווט
+│   ├── Landing.tsx
+│   ├── CharactersPage.tsx
+│   ├── CharacterPage.tsx
+│   ├── Favorites.tsx
+│   └── NotFound.tsx
+├── components/         # רכיבים משותפים
+│   ├── CharacterCard.tsx
+│   ├── CharacterList.tsx
+│   ├── CharacterDetail.tsx
+│   └── SearchBar.tsx
+├── utils/              # פונקציות טהורות
+│   ├── characters.ts
+│   └── characters.test.ts
+├── types.ts            # הגדרות TypeScript
+├── App.tsx             # ניהול ה-state הראשי
+└── App.css             # עיצוב גלובלי
 ```
 
-## הסבר על זרימת המידע וניהול ה-State
+## תכונות
 
-ה-state של הדמות שנבחרה (`selectedCharacter`) מנוהל ונשמר ברכיב האב הראשי `App`. 
-בחרנו לשמור אותו שם מכיוון שזהו רכיב האב המשותף הקרוב ביותר ששני החלקים (רשימת הדמויות ופאנל הפרטים) זקוקים לו. 
-כאשר המשתמש לוחץ על כרטיס של דמות ב-`CharacterCard`, מופעלת פונקציית callback שמועברת כלפי מעלה ומעדכנת את ה-state ב-`App`. 
-ברגע שה-state משתנה, React מפעיל רינדור מחדש ומעביר את אובייקט הדמות שנבחרה למטה כ-prop בשם `character` ישירות לרכיב `CharacterDetail`. 
-רכיב הפרטים מקבל את ה-prop לקריאה בלבד ומציג את הנתונים המלאים של הדמות שנבחרה (שם, תמונה, סטטוס, גזע ועולם מוצא).
+- ✅ **Routing** — עמודים נפרדים עם NavLink ו-active styling
+- ✅ **חיפוש** — filtering בזמן אמת, case-insensitive, עם trim
+- ✅ **פרטים עם fetch** — כל דמות טוענת את הנתונים שלה בנפרד (`/characters/:id`)
+- ✅ **מועדפים** — הטבעה/הסרה מ-localStorage בלחיצה
+- ✅ **TypeScript** — typed props, state, event handlers
+- ✅ **CSS Modules** — אנימציות fade-in, NavLink active state, responsive grid
+- ✅ **Unit Tests** — בדיקות של פונקציות עזר (filtering, formatting)
+- ✅ **Integration Tests** — בדיקות ניווט בין דפים וחיפוש
+
+## הערות לפיתוח
+
+- כל דמות נטענת בנפרד מה-API כש-URL ישירה לדמות נפתחת (reload תומך)
+- מועדפים מתעדכנים ב-localStorage בכל עדכון
+- הממשק תומך בעברית וערבית (RTL) בעזרת `dir="rtl"`
+- אין שימוש בספריות UI חיצוניות — CSS טהור בלבד

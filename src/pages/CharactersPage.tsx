@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CharacterList from '../components/CharacterList'
 import SearchBar from '../components/SearchBar'
+import { filterCharactersByName } from '../utils/characters'
 import { Character } from '../types'
 
 interface CharactersPageProps {
@@ -22,9 +23,7 @@ export default function CharactersPage({
 }: CharactersPageProps) {
   const [searchTerm, setSearchTerm] = useState('')
 
-  const filteredCharacters = characters.filter(char =>
-    char.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredCharacters = filterCharactersByName(characters, searchTerm)
 
   return (
     <main className="app">
