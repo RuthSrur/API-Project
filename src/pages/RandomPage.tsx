@@ -25,30 +25,25 @@ export default function RandomPage({
   useEffect(() => {
     if (rollCount === 0) return
 
-    let isMounted = true
+    // eslint-disable-next-line react/set-state-in-effect
+    setLoading(true)
+    setError(null)
 
-    const fetchCharacter = async () => {
-      setLoading(true)
-      setError(null)
+    const randomId = getRandomCharacterId(MAX_CHARACTER_ID)
 
-      const randomId = getRandomCharacterId(MAX_CHARACTER_ID)
-
-      try {
-        const res = await fetch(`https://rickandmortyapi.com/api/character/${randomId}`)
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const data: Character = await res.json()
-        if (isMounted) setCharacter(data)
-      } catch (err) {
-        let errorMsg = 'Failed to fetch random character'
-        if (err instanceof Error) errorMsg = err.message
-        if (isMounted) setError(errorMsg)
-      } finally {
-        if (isMounted) setLoading(false)
-      }
-    }
-
-    fetchCharacter()
-    return () => { isMounted = false }
+    fetch(`https://rickandmortyapi.com/api/character/${randomId}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to load random character')
+        return res.json()
+      })
+      .then((data: Character) => {
+        setCharacter(data)
+        setLoading(false)
+      })
+      .catch((err: Error) => {
+        setError(err.message)
+        setLoading(false)
+      })
   }, [rollCount])
 
   const handleFavoriteClick = () => {

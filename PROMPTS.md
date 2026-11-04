@@ -619,3 +619,18 @@ I checked: There is a new page of Statistics.
 **22:54 · claude**
 > On the Random page, remove the "View full page →" link and its CSS class. Remove the `Link` import from `RandomPage.tsx` if it is no longer used. Update PRD.md if it mentions this link. Do not touch PROMPTS.md.
 > Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass. Do not commit.
+
+**23:14 · claude**
+
+> Final check fixes. Do not change any behavior.
+> 
+> 1. PRD.md: remove every mention of the Stats/Statistics page (the pitch line, the features list, the "Stats" NavLink in the navigation criteria, and the Statistics data section) and the "View full page" link on the Random page. The menu has Characters, Random, and Favorites.
+> 2. README.md: the list endpoint is `GET https://rickandmortyapi.com/api/character/1,2,...,60` (60 characters in one request). Update it.
+> 3. docs/architecture.md: there are 10 unit tests and 2 component tests (12 in total). Update the numbers.
+> 4. In App.tsx, move the inline `style={{...}}` on the logo Link into a CSS class.
+> 5. On the Random page, center the "Who will the portal bring you?" text on all screen sizes.
+> 6. In RandomPage.tsx, rewrite the fetch in the same simple `.then().catch()` style used in CharacterPage.tsx, keeping `if (rollCount === 0) return` and resetting loading/error before each fetch.
+> 7. Do not touch PROMPTS.md.
+> 8. Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass.
+> 
+> Explain in 2 plain sentences. Do not commit.

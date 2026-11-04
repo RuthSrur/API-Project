@@ -2,7 +2,7 @@
 
 ## 1. One-Sentence Pitch
 
-A fast, lightweight web app for Rick and Morty fans to explore characters, view detailed profiles, save favorites, and browse statistics.
+A fast, lightweight web app for Rick and Morty fans to explore characters, view detailed profiles, and save favorites.
 
 ## 2. Who It Is For
 
@@ -14,17 +14,17 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 2. **Characters List** (`/characters`) — Responsive grid of 60 character cards with search bar, filtered in real-time.
 3. **Character Details** (`/characters/:id`) — Full character profile with info, image, favorite button, and back link.
 4. **Favorites** (`/favorites`) — Grid of saved characters with option to remove or view details.
-5. **Random Character** (`/random`) — Load and display a random character with "Roll again" button to fetch another, and a link to the full character details page.
+5. **Random Character** (`/random`) — Load and display a random character with "Roll again" button to fetch another.
 6. **404 Page** (`*`) — Helpful error page with navigation back to home.
 
 ## 4. Must-Have Features
 
-1. Navigate between 6 pages using NavLink with visual active state.
+1. Navigate between 5 pages using NavLink with visual active state.
 2. Browse characters from the Rick and Morty API with lazy loading per page.
 3. Live search bar to filter characters by name (case-insensitive).
 4. Click any character to view full details on a dedicated page that loads independently.
 5. Add/remove characters to favorites, persisted in localStorage.
-6. View statistics: total count, breakdown by status, and species distribution.
+6. Roll random characters with a button-triggered fetch and spinner.
 7. Robust error and loading states on all data-fetching pages.
 
 ## 5. Acceptance Criteria
@@ -60,7 +60,7 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 ### Navigation
 - **When I navigate to any URL not defined above (e.g., `/invalid`),** I see a 404 page with a link back home.
 - **When I click the app title** "Rick and Morty Explorer 🛸", **I navigate to the landing page** (`/`).
-- **When I click a NavLink** (Characters, Stats, Favorites), **it shows active styling** (darker background, underline) for the current page.
+- **When I click a NavLink** (Characters, Random, Favorites), **it shows active styling** (darker background, underline) for the current page.
 
 ## 6. Data
 
@@ -75,9 +75,6 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 
 **Character Details:**
 - `id`, `name`, `image`, `status`, `species`, `gender`, `origin` (object with `name`), `location` (object with `name`), `episode` (array for count), `created` (ISO string)
-
-**Statistics:**
-- `status` (for breakdown), `species` (for breakdown)
 
 ### Storage
 - **Favorites:** Stored in `localStorage` under key `'favorites'`, persisted across page reloads.

@@ -86,7 +86,7 @@ const [favorites, setFavorites] = useState<Character[]>(() => {
 - `toggleFavorite(favorites, character)` → updated array
 - `getRandomCharacterId(maxId)` → random whole number 1 to maxId
 
-All tested in `src/utils/characters.test.ts` (8 unit tests).
+All tested in `src/utils/characters.test.ts` (10 unit tests including getCharacterIds).
 
 ## CSS Architecture
 
@@ -106,8 +106,8 @@ All tested in `src/utils/characters.test.ts` (8 unit tests).
 
 ## Testing
 
-- **Unit Tests:** `src/utils/characters.test.ts` (8 tests of pure functions including random ID generation)
-- **Integration Tests:** `src/__tests__/App.test.tsx` (2 tests of routing and search)
-- **Total:** 10 tests via `npm test`
+- **Unit Tests:** `src/utils/characters.test.ts` (10 tests of pure functions including random ID generation and 60-character loading)
+- **Component Tests:** `src/__tests__/App.test.tsx` (2 tests of routing and search)
+- **Total:** 12 tests via `npm test`
 
 Run `npm run test:ui` for interactive Vitest UI dashboard.

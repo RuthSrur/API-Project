@@ -54,7 +54,7 @@ npm run build
 
 האפליקציה משתמשת ב-[Rick and Morty API](https://rickandmortyapi.com/):
 
-- **רשימת דמויות**: `GET https://rickandmortyapi.com/api/character`
+- **60 דמויות**: `GET https://rickandmortyapi.com/api/character/1,2,...,60`
 - **דמות בודדת**: `GET https://rickandmortyapi.com/api/character/{id}`
 
 כל קריאה כוללת טעינה ותיקייה מצב שגיאה.

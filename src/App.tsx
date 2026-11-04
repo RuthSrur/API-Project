@@ -57,7 +57,7 @@ export default function App() {
     <BrowserRouter>
       <div className="app-wrapper">
         <nav className="navbar">
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/" className="navbar-logo">
             <h1>Rick and Morty Explorer 🛸</h1>
           </Link>
           <div className="nav-links">
