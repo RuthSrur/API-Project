@@ -40,3 +40,7 @@ export function toggleFavorite(favorites: Character[], character: Character): Ch
 export function getRandomCharacterId(maxId: number): number {
   return Math.floor(Math.random() * maxId) + 1
 }
+
+export function getCharacterIds(count: number): string {
+  return Array.from({ length: count }, (_, i) => String(i + 1)).join(',')
+}

@@ -11,7 +11,7 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 ## 3. Screens
 
 1. **Landing Page** (`/`) — Welcome screen with app title and "Browse Characters" button.
-2. **Characters List** (`/characters`) — Responsive grid of character cards with search bar, filtered in real-time.
+2. **Characters List** (`/characters`) — Responsive grid of 60 character cards with search bar, filtered in real-time.
 3. **Character Details** (`/characters/:id`) — Full character profile with info, image, favorite button, and back link.
 4. **Favorites** (`/favorites`) — Grid of saved characters with option to remove or view details.
 5. **Random Character** (`/random`) — Load and display a random character with "Roll again" button to fetch another, and a link to the full character details page.
@@ -52,9 +52,9 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 - **When I click the heart button,** the character is removed from favorites.
 
 ### Random Character
-- **When I visit `/random`,** I see a random character with their profile and a "🎲 Roll again" button.
-- **When I click "Roll again",** a new random character loads.
-- **When I click "View full page →",** I navigate to `/characters/{id}` for the full profile.
+- **When I visit `/random`,** I see an intro text "Who will the portal bring you?" and a "🎲 Roll a character" button.
+- **When I click "Roll a character",** a random character loads with their profile and a "🎲 Roll again" button.
+- **When I click "Roll again",** a new random character loads (shows spinner during fetch).
 - **When loading or error occurs,** I see appropriate loading/error messages.
 
 ### Navigation

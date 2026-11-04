@@ -6,8 +6,11 @@ import CharacterPage from './pages/CharacterPage'
 import Favorites from './pages/Favorites'
 import RandomPage from './pages/RandomPage'
 import NotFound from './pages/NotFound'
+import { getCharacterIds } from './utils/characters'
 import { Character } from './types'
 import './App.css'
+
+const CHARACTERS_TO_LOAD = 60
 
 export default function App() {
   const [characters, setCharacters] = useState<Character[]>([])
@@ -19,13 +22,15 @@ export default function App() {
   })
 
   useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character')
+    const characterIds = getCharacterIds(CHARACTERS_TO_LOAD)
+    fetch(`https://rickandmortyapi.com/api/character/${characterIds}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch characters')
         return res.json()
       })
-      .then((data: { results: Character[] }) => {
-        setCharacters(data.results)
+      .then((data: Character | Character[]) => {
+        const characters = Array.isArray(data) ? data : [data]
+        setCharacters(characters)
         setLoading(false)
       })
       .catch((err: Error) => {

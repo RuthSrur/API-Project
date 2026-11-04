@@ -62,7 +62,7 @@ describe('App Component', () => {
         }
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve({ results: mockCharacters }),
+          json: () => Promise.resolve(mockCharacters),
         })
       })
     )

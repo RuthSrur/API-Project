@@ -5,6 +5,7 @@ import {
   formatEpisodeCount,
   toggleFavorite,
   getRandomCharacterId,
+  getCharacterIds,
 } from './characters'
 import { Character } from '../types'
 
@@ -107,5 +108,20 @@ describe('getRandomCharacterId', () => {
       expect(id).toBeGreaterThanOrEqual(1)
       expect(id).toBeLessThanOrEqual(maxId)
     }
+  })
+})
+
+describe('getCharacterIds', () => {
+  it('returns comma-separated string of ids from 1 to count', () => {
+    const result = getCharacterIds(5)
+    expect(result).toBe('1,2,3,4,5')
+  })
+
+  it('returns correct format for 60 characters', () => {
+    const result = getCharacterIds(60)
+    const ids = result.split(',').map(Number)
+    expect(ids).toHaveLength(60)
+    expect(ids[0]).toBe(1)
+    expect(ids[59]).toBe(60)
   })
 })

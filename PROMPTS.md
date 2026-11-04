@@ -590,3 +590,32 @@ I checked: There is a new page of Statistics.
 **16:40 · claude**
 
 > yes
+
+**16:45 · claude**
+> Two changes. Keep the code simple and easy to read for a beginner.
+> 
+> 1. More characters on the Characters page:
+>    - In `App.tsx`, load 60 characters instead of 20 with one request: `https://rickandmortyapi.com/api/character/1,2,...,60`. Build the id list with a small pure function `getCharacterIds(count)` in `src/utils/characters.ts` that returns "1,2,...,count", and add one unit test for it.
+>    - Note: this endpoint returns an array directly, not `{ results }`. Update the types and the fetch handling.
+>    - Update the fetch mock in `App.test.tsx` to match.
+>    - Put the number 60 in one named constant (e.g. `CHARACTERS_TO_LOAD`).
+> 
+> 2. Random page:
+>    - When the page opens, do not load a character. Show a centered intro: a short line "Who will the portal bring you?" and a big centered button "🎲 Roll a character".
+>    - Only fetch after the first click. Keep `fetch` inside `useEffect` with `rollCount` in the dependencies, and skip the fetch when `rollCount` is 0.
+>    - On every roll, set loading to true and clear the error before fetching, so the spinner shows each time.
+>    - After a character is shown, the button text becomes "🎲 Roll again" and stays centered above the character.
+>    - Move the 2 inline `style={{...}}` in `RandomPage.tsx` into CSS classes in App.css.
+> 
+> 3. Update `README.md` and `PRD.md` (60 characters, the Random page starts with a button), and add task 11 to `tasks.md` with a "Done when:" line. Do not touch PROMPTS.md.
+> 4. Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass.
+> 
+> Explain in 3 plain sentences. Do not commit.
+
+**16:57 · claude**
+
+> i get failed to fetch when clicking on roll a character
+
+**22:54 · claude**
+> On the Random page, remove the "View full page →" link and its CSS class. Remove the `Link` import from `RandomPage.tsx` if it is no longer used. Update PRD.md if it mentions this link. Do not touch PROMPTS.md.
+> Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass. Do not commit.

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import CharacterDetail from '../components/CharacterDetail'
 import { getRandomCharacterId } from '../utils/characters'
 import { isFavorite } from '../utils/characters'
@@ -19,27 +18,37 @@ export default function RandomPage({
   onRemoveFavorite,
 }: RandomPageProps) {
   const [character, setCharacter] = useState<Character | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [rollCount, setRollCount] = useState(0)
 
   useEffect(() => {
-    const randomId = getRandomCharacterId(MAX_CHARACTER_ID)
+    if (rollCount === 0) return
 
-    fetch(`https://rickandmortyapi.com/api/character/${randomId}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to load random character')
-        return res.json()
-      })
-      .then((data: Character) => {
-        setCharacter(data)
-        setLoading(false)
-        setError(null)
-      })
-      .catch((err: Error) => {
-        setError(err.message)
-        setLoading(false)
-      })
+    let isMounted = true
+
+    const fetchCharacter = async () => {
+      setLoading(true)
+      setError(null)
+
+      const randomId = getRandomCharacterId(MAX_CHARACTER_ID)
+
+      try {
+        const res = await fetch(`https://rickandmortyapi.com/api/character/${randomId}`)
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data: Character = await res.json()
+        if (isMounted) setCharacter(data)
+      } catch (err) {
+        let errorMsg = 'Failed to fetch random character'
+        if (err instanceof Error) errorMsg = err.message
+        if (isMounted) setError(errorMsg)
+      } finally {
+        if (isMounted) setLoading(false)
+      }
+    }
+
+    fetchCharacter()
+    return () => { isMounted = false }
   }, [rollCount])
 
   const handleFavoriteClick = () => {
@@ -54,33 +63,41 @@ export default function RandomPage({
   return (
     <main className="app">
       <div className="character-page-container">
-        {loading && <div className="portal-spinner"></div>}
-        {error && <p className="error-message">{error}</p>}
-        {!loading && !error && character && (
-          <>
-            <div style={{ marginBottom: '20px' }}>
-              <button
-                onClick={() => setRollCount(rollCount + 1)}
-                className="primary-button"
-              >
-                🎲 Roll again
-              </button>
-            </div>
-            <div className="character-page-detail">
-              <CharacterDetail
-                key={character.id}
-                character={character}
-                onFavoriteClick={handleFavoriteClick}
-                isFavorited={isFavorite(favorites, character.id)}
-                showFavoriteButton
-              />
-            </div>
-            <Link
-              to={`/characters/${character.id}`}
-              style={{ display: 'block', marginTop: '20px', textAlign: 'center', color: '#3b82f6' }}
+        {rollCount === 0 ? (
+          <div className="random-intro">
+            <p className="random-intro-text">Who will the portal bring you?</p>
+            <button
+              onClick={() => setRollCount(1)}
+              className="primary-button"
             >
-              View full page →
-            </Link>
+              🎲 Roll a character
+            </button>
+          </div>
+        ) : (
+          <>
+            {loading && <div className="portal-spinner"></div>}
+            {error && <p className="error-message">{error}</p>}
+            {!loading && !error && character && (
+              <>
+                <div className="random-button-container">
+                  <button
+                    onClick={() => setRollCount(rollCount + 1)}
+                    className="primary-button"
+                  >
+                    🎲 Roll again
+                  </button>
+                </div>
+                <div className="character-page-detail">
+                  <CharacterDetail
+                    key={character.id}
+                    character={character}
+                    onFavoriteClick={handleFavoriteClick}
+                    isFavorited={isFavorite(favorites, character.id)}
+                    showFavoriteButton
+                  />
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
