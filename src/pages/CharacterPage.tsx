@@ -51,7 +51,7 @@ export default function CharacterPage({
   return (
     <main className="app">
       <div className="character-page-container">
-        {loading && <p>Loading...</p>}
+        {loading && <div className="portal-spinner"></div>}
         {error && <p className="error-message">{error}</p>}
         {!loading && !error && character && (
           <>

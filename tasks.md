@@ -20,3 +20,7 @@
       *Done when:* /stats נטען עם סטטים, StatCard כרטיסים מציגים מספרים, countByStatus ו-countBySpecies עוברים tests, כל הטסטים עוברים.
 - [x] **9 · Documentation** — PRD.md עם 6 דפים וקריטריונים, docs/architecture.md עם component tree ודאטה flow, README.md עם Stats ו-10 בדיקות.
       *Done when:* PRD.md מכסה את כל העמודים והקריטריונים, architecture.md מתאר את כל הרכיבים וזרימת הנתונים, README.md מאומת ל-Stats ו-10 בדיקות.
+- [x] **10 · Random Character** — החלפת דף /stats בדף /random המציג דמות אקראית עם כפתור "גלגל שוב" ו-Link לעמוד הדמות המלא. getRandomCharacterId utility function with unit test, update navigation and docs.
+      *Done when:* /random נטען עם דמות אקראית, "🎲 Roll again" טוען דמות חדשה, getRandomCharacterId עובר test, כל הטסטים עוברים (10 total).
+- [x] **11 · Rick & Morty Theme** — Dark space background gradient, portal green (#97ce4c) accent, Fredoka display font, CSS variables for theme, glowing cards on hover, portal spinner animations, staggered card entrance, green navbar glow on active link, responsive design at 375px.
+      *Done when:* App has Rick & Morty dark theme with CSS variables, loading spinner is portal animation, cards have staggered entrance and glow, navbar has green active state, all tests pass, no horizontal scroll on 375px width.

@@ -4,8 +4,7 @@ import {
   formatCreatedDate,
   formatEpisodeCount,
   toggleFavorite,
-  countByStatus,
-  toPercent,
+  getRandomCharacterId,
 } from './characters'
 import { Character } from '../types'
 
@@ -99,23 +98,14 @@ describe('toggleFavorite', () => {
   })
 })
 
-describe('countByStatus', () => {
-  it('returns { Alive: 2, Dead: 1 } for 2 Alive + 1 Dead', () => {
-    const result = countByStatus(mockCharacters)
-    expect(result.Alive).toBe(2)
-    expect(result.Dead).toBe(1)
-    expect(result.unknown).toBe(0)
-  })
-})
-
-describe('toPercent', () => {
-  it('returns 0 when total is 0', () => {
-    const result = toPercent(5, 0)
-    expect(result).toBe(0)
-  })
-
-  it('returns rounded percent correctly', () => {
-    const result = toPercent(2, 3)
-    expect(result).toBe(67)
+describe('getRandomCharacterId', () => {
+  it('returns whole numbers between 1 and maxId', () => {
+    const maxId = 826
+    for (let i = 0; i < 100; i++) {
+      const id = getRandomCharacterId(maxId)
+      expect(Number.isInteger(id)).toBe(true)
+      expect(id).toBeGreaterThanOrEqual(1)
+      expect(id).toBeLessThanOrEqual(maxId)
+    }
   })
 })

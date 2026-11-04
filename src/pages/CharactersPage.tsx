@@ -27,7 +27,7 @@ export default function CharactersPage({
 
   return (
     <main className="app">
-      {loading && <p>Loading characters...</p>}
+      {loading && <div className="portal-spinner"></div>}
       {error && <p className="error-message">Failed to load data. Please try again.</p>}
       {!loading && !error && (
         <>

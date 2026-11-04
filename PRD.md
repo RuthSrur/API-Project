@@ -14,7 +14,7 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 2. **Characters List** (`/characters`) — Responsive grid of character cards with search bar, filtered in real-time.
 3. **Character Details** (`/characters/:id`) — Full character profile with info, image, favorite button, and back link.
 4. **Favorites** (`/favorites`) — Grid of saved characters with option to remove or view details.
-5. **Statistics** (`/stats`) — Overview showing total character count, breakdown by status (Alive/Dead/unknown), and top species.
+5. **Random Character** (`/random`) — Load and display a random character with "Roll again" button to fetch another, and a link to the full character details page.
 6. **404 Page** (`*`) — Helpful error page with navigation back to home.
 
 ## 4. Must-Have Features
@@ -51,9 +51,11 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 - **When I click a favorite card,** I navigate to its detail page.
 - **When I click the heart button,** the character is removed from favorites.
 
-### Statistics
-- **When I visit `/stats`,** I see total character count, counts by status, and counts by species sorted by frequency.
-- **When loading or error occurs,** I see appropriate loading/error messages (same as character list).
+### Random Character
+- **When I visit `/random`,** I see a random character with their profile and a "🎲 Roll again" button.
+- **When I click "Roll again",** a new random character loads.
+- **When I click "View full page →",** I navigate to `/characters/{id}` for the full profile.
+- **When loading or error occurs,** I see appropriate loading/error messages.
 
 ### Navigation
 - **When I navigate to any URL not defined above (e.g., `/invalid`),** I see a 404 page with a link back home.

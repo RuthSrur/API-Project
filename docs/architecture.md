@@ -13,11 +13,11 @@ App.tsx (Root)
 │   │           ├── SearchBar.tsx (controlled input)
 │   ├── CharacterPage.tsx
 │   │   └── CharacterDetail.tsx (with favorite button)
+│   ├── RandomPage.tsx
+│   │   └── CharacterDetail.tsx (with favorite button)
 │   ├── Favorites.tsx
 │   │   └── CharacterList.tsx
 │   │       └── CharacterCard.tsx
-│   ├── StatsPage.tsx
-│   │   └── StatCard.tsx (map over status/species counts)
 │   └── NotFound.tsx
 ```
 
@@ -64,11 +64,16 @@ const [favorites, setFavorites] = useState<Character[]>(() => {
 
 1. **App.tsx, useEffect on mount:**
    - `GET https://rickandmortyapi.com/api/character` → all characters
-   - Stores in state, used for list and stats
+   - Stores in state, used for list and search
 
 2. **CharacterPage.tsx, useEffect on `id` param:**
    - `GET https://rickandmortyapi.com/api/character/{id}` → single character
    - Stores in local state, allows independent detail page load (supports direct URL access)
+
+3. **RandomPage.tsx, useEffect on `rollCount`:**
+   - `GET https://rickandmortyapi.com/api/character/{randomId}` → random character
+   - Uses `getRandomCharacterId(826)` to pick an ID between 1 and 826
+   - Refetches when user clicks "Roll again" button (increments rollCount)
 
 ## Utility Functions
 
@@ -79,8 +84,7 @@ const [favorites, setFavorites] = useState<Character[]>(() => {
 - `getLocationName(character)` → "Unknown" if missing
 - `isFavorite(favorites, id)` → boolean
 - `toggleFavorite(favorites, character)` → updated array
-- `countByStatus(characters)` → { Alive, Dead, unknown }
-- `countBySpecies(characters)` → { [species]: count, ... }
+- `getRandomCharacterId(maxId)` → random whole number 1 to maxId
 
 All tested in `src/utils/characters.test.ts` (8 unit tests).
 
@@ -102,7 +106,7 @@ All tested in `src/utils/characters.test.ts` (8 unit tests).
 
 ## Testing
 
-- **Unit Tests:** `src/utils/characters.test.ts` (8 tests of pure functions)
+- **Unit Tests:** `src/utils/characters.test.ts` (8 tests of pure functions including random ID generation)
 - **Integration Tests:** `src/__tests__/App.test.tsx` (2 tests of routing and search)
 - **Total:** 10 tests via `npm test`
 

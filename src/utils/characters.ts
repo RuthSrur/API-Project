@@ -37,32 +37,6 @@ export function toggleFavorite(favorites: Character[], character: Character): Ch
   return [...favorites, character]
 }
 
-export function countByStatus(
-  characters: Character[]
-): { Alive: number; Dead: number; unknown: number } {
-  return characters.reduce(
-    (counts, char) => {
-      if (char.status === 'Alive') counts.Alive++
-      else if (char.status === 'Dead') counts.Dead++
-      else if (char.status === 'unknown') counts.unknown++
-      return counts
-    },
-    { Alive: 0, Dead: 0, unknown: 0 }
-  )
-}
-
-export function countBySpecies(characters: Character[]): Record<string, number> {
-  return characters.reduce(
-    (counts, char) => {
-      const species = char.species || 'Unknown'
-      counts[species] = (counts[species] || 0) + 1
-      return counts
-    },
-    {} as Record<string, number>
-  )
-}
-
-export function toPercent(count: number, total: number): number {
-  if (total === 0) return 0
-  return Math.round((count / total) * 100)
+export function getRandomCharacterId(maxId: number): number {
+  return Math.floor(Math.random() * maxId) + 1
 }

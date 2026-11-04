@@ -537,3 +537,56 @@ I checked: There is a new page of Statistics.
 > 6. Do not touch PROMPTS.md. Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass.
 > 
 > Explain in 2 plain sentences. Do not commit.
+
+## 2026-11-04
+
+**16:26 · claude**
+
+> Task 10: replace the Stats page with a Random Character page. Show me a short plan first and wait for my approval. Keep the code simple and easy to read for a beginner.
+> 
+> 1. Remove the Stats page completely: `StatsPage.tsx`, `StatCard.tsx`, the `/stats` route and NavLink, the stats CSS, and the functions `countByStatus`, `countBySpecies`, and `toPercent` together with their tests.
+> 2. Add a pure function `getRandomCharacterId(maxId: number): number` in `src/utils/characters.ts` that returns a whole number from 1 to maxId. Add one unit test that calls it 100 times and checks that every result is a whole number between 1 and maxId.
+> 3. Create `src/pages/RandomPage.tsx` at `/random`, with a "Random" NavLink in the menu:
+>    - Fetch `https://rickandmortyapi.com/api/character/{randomId}` with `fetch` inside `useEffect` (use 826 as maxId).
+>    - Show loading, error, and data states.
+>    - Show the character with the existing `CharacterDetail` component (including the favorite button), using `key={character.id}` so the fade-in replays.
+>    - Add a "🎲 Roll again" button that loads a new random character. A simple way: keep a `rollCount` state, increase it on click, and put it in the useEffect dependencies.
+>    - Add a Link "View full page →" to `/characters/{id}`.
+> 4. Update `PRD.md`, `README.md`, `docs/architecture.md`, and add task 10 to `tasks.md` with a "Done when:" line, so the Stats page is replaced by the Random page everywhere.
+> 5. No `any`, no inline styles, and the page must look fine on a narrow screen. Do not touch PROMPTS.md.
+> 6. Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass, with 10 tests in total.
+> 
+> Explain in 3 plain sentences. Do not commit.
+
+**16:32 · claude**
+
+> yes
+
+**16:40 · claude**
+
+
+> Task 11: give the app a polished, themed design inspired by Rick and Morty (portal green, space, sci-fi). Show me a short plan with the color palette and fonts first and wait for my approval.
+> 
+> Rules:
+> - Plain CSS in our own files only. No UI libraries, no CSS frameworks, no npm packages, no inline styles.
+> - Do not change any behavior, routes, or tests. Change only CSS, `index.html`, and, if really needed, a className in a component.
+> - Keep the code simple: put all colors and fonts in CSS variables in `:root` at the top of `index.css`, so the theme is easy to explain and change.
+> 
+> Design:
+> 1. Fonts: add 2 Google Fonts with a `<link>` in `index.html`: a fun rounded display font for headings and the logo (e.g. "Fredoka"), and a clean font for body text (e.g. "Inter").
+> 2. Colors: a dark space background (a subtle gradient), portal green (#97ce4c) as the main accent, and white or light text with good contrast. Status colors: green for Alive, red for Dead, gray for unknown.
+> 3. Navbar: sticky, slightly transparent with a blur, and a green glowing underline on the active NavLink.
+> 4. Landing page: a big title and a spinning green "portal" circle made with pure CSS (conic-gradient + rotate animation) behind or next to the title, and a glowing "Browse Characters" button.
+> 5. Cards: dark cards with rounded corners, a green glow on hover, a staggered entrance (each card appears slightly after the previous one, using `:nth-child` and `animation-delay`), and a heart button that pops when clicked.
+> 6. Details and Random pages: the same dark card style; the "Roll again" button gets a small spin on the 🎲 icon on hover.
+> 7. Loading state: a small spinning portal instead of plain text, made with CSS only.
+> 8. Keep and extend the `@media (prefers-reduced-motion: reduce)` block so all new animations turn off for users who prefer less motion.
+> 9. Make sure everything still looks good on a narrow screen (375px), with no horizontal scroll.
+> 
+> Add task 11 to `tasks.md` with a "Done when:" line. Do not touch PROMPTS.md.
+> Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. All must pass.
+> Explain in 3 plain sentences. Do not commit.
+
+**16:40 · claude**
+
+> yes
