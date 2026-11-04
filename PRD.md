@@ -19,8 +19,8 @@ Fans of the animated show looking for an interactive reference guide to browse, 
 
 ## 4. Must-Have Features
 
-1. Navigate between 5 pages using NavLink with visual active state.
-2. Browse characters from the Rick and Morty API with lazy loading per page.
+1. Navigate with a menu of 3 NavLinks (Characters, Random, Favorites); the logo links to the landing page.
+2. Browse 60 characters loaded from the Rick and Morty API in one request.
 3. Live search bar to filter characters by name (case-insensitive).
 4. Click any character to view full details on a dedicated page that loads independently.
 5. Add/remove characters to favorites, persisted in localStorage.

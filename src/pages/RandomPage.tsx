@@ -25,10 +25,6 @@ export default function RandomPage({
   useEffect(() => {
     if (rollCount === 0) return
 
-    // eslint-disable-next-line react/set-state-in-effect
-    setLoading(true)
-    setError(null)
-
     const randomId = getRandomCharacterId(MAX_CHARACTER_ID)
 
     fetch(`https://rickandmortyapi.com/api/character/${randomId}`)
@@ -46,6 +42,12 @@ export default function RandomPage({
       })
   }, [rollCount])
 
+  const handleRoll = () => {
+    setLoading(true)
+    setError(null)
+    setRollCount(rollCount + 1)
+  }
+
   const handleFavoriteClick = () => {
     if (!character) return
     if (isFavorite(favorites, character.id)) {
@@ -62,7 +64,7 @@ export default function RandomPage({
           <div className="random-intro">
             <p className="random-intro-text">Who will the portal bring you?</p>
             <button
-              onClick={() => setRollCount(1)}
+              onClick={handleRoll}
               className="primary-button"
             >
               🎲 Roll a character
@@ -76,7 +78,7 @@ export default function RandomPage({
               <>
                 <div className="random-button-container">
                   <button
-                    onClick={() => setRollCount(rollCount + 1)}
+                    onClick={handleRoll}
                     className="primary-button"
                   >
                     🎲 Roll again
