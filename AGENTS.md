@@ -32,3 +32,12 @@
 
   אם התאריך של היום עוד לא מופיע ביומן, להוסיף לפני הרשומה כותרת `## YYYY-MM-DD`.
 - לא לערוך ולא למחוק רשומות קיימות ביומן.
+
+
+<claude-mem-context>
+# Memory Context
+
+# [react-project-starter] recent context, 2026-11-05 10:22am GMT+2
+
+No previous sessions found.
+</claude-mem-context>
